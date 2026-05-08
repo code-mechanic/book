@@ -1,0 +1,37 @@
+title: "C Programming Book"
+author: "Mohan Arunachalam"
+date: "2026"
+
+toc: true
+toc-depth: 3
+
+numbersections: true
+
+geometry: margin=1in
+
+mainfont: Ubuntu
+fontsize: 10pt
+
+colorlinks: true
+linkcolor: blue
+
+papersize: a4
+
+pdf-engine: xelatex
+
+filters:
+  - mermaid-filter
+
+header-includes:
+  - |
+    ```{=latex}
+    \usepackage{xcolor}
+    \usepackage{fvextra}
+
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}
+    {
+      breaklines,
+      breakanywhere,
+      fontsize=\small
+    }
+    ```
