@@ -1,0 +1,15 @@
+% Source - https://stackoverflow.com/a/54669722
+% Posted by jdhao, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-05-09, License - CC BY-SA 4.0
+
+\definecolor{bgcolor}{HTML}{E0E0E0}
+\let\oldtexttt\texttt
+
+\renewcommand{\texttt}[1]{
+  \colorbox{bgcolor}{\oldtexttt{#1}}
+}
+
+\providecommand{\CodeLineNumberSize}{\scriptsize}
+\AtBeginDocument{
+  \renewcommand{\theFancyVerbLine}{\CodeLineNumberSize\arabic{FancyVerbLine}}
+}

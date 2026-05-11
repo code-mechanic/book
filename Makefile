@@ -1,15 +1,20 @@
 include docker/targets_docker.mk
 
-pandoc_help:
+C_PROGRAMMING_CHAPTERS := $(wildcard c_programming/chapters/*.md)
+PANDOC_CONFIG := pandoc/c_programming.yaml
+CODE_LINE_NUMBER_SIZE ?= scriptsize
+
+environment_details:
 	$(DOCKER) pandoc --help
 	$(DOCKER) pandoc --version
+	$(DOCKER) node --version
+	$(DOCKER) npm --version
 
 book_c_programming:
 	$(DOCKER) pandoc \
-	c_programming/chapters/chapter1.md \
-	c_programming/chapters/chapter2.md \
-	-d book.yaml \
-	--pdf-engine=xelatex \
+	$(C_PROGRAMMING_CHAPTERS) \
+	--defaults=$(PANDOC_CONFIG) \
+	-V header-includes='\newcommand{\CodeLineNumberSize}{\$(CODE_LINE_NUMBER_SIZE)}' \
 	-o c_programming_book.pdf
 
 clean:
