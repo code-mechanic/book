@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     lmodern \
     fonts-dejavu \
     fonts-linuxlibertine \
-    fonts-firacode \
+    fonts-ubuntu \
     make \
     && rm -rf /var/lib/apt/lists/*
 

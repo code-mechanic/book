@@ -1,0 +1,42 @@
+% Source - https://stackoverflow.com/a/54669722
+% Posted by jdhao, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-05-09, License - CC BY-SA 4.0
+
+\definecolor{bgcolor}{HTML}{E0E0E0}
+\definecolor{codeblockbgcolor}{HTML}{E0E0E0}
+\definecolor{quotebgcolor}{HTML}{E0E0E0}
+\let\oldtexttt\texttt
+\usepackage{mdframed}
+\usepackage{tikz}
+
+\IfFileExists{pandoc/fonts/MonaSans-Regular.ttf}
+  {\setmainfont[Path=pandoc/fonts/]{MonaSans-Regular.ttf}}
+  {\setmainfont{Linux Libertine O}}
+
+\IfFileExists{pandoc/fonts/Monaco.ttf}
+  {\setmonofont[Path=pandoc/fonts/]{Monaco.ttf}}
+  {\setmonofont{Ubuntu Mono}}
+
+\renewcommand{\texttt}[1]{
+  \colorbox{bgcolor}{\oldtexttt{#1}}
+}
+
+\newcommand{\QuoteIcon}{%
+  \tikz[baseline=-0.6ex, scale=0.18]{
+    \draw[fill=yellow!45, draw=black, line width=0.6pt] (0,1.55) circle (0.9);
+    \draw[draw=black, line width=0.6pt] (-0.45,0.85) -- (0.45,0.85) -- (0.32,0.3) -- (-0.32,0.3) -- cycle;
+    \draw[draw=black, line width=0.6pt] (-0.35,0.05) -- (0.35,0.05);
+  }%
+}
+
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}
+  {\begin{mdframed}[backgroundcolor=quotebgcolor, linecolor=quotebgcolor, linewidth=0pt, innertopmargin=0.8em, innerbottommargin=0.8em, innerleftmargin=1em, innerrightmargin=1em, skipabove=0.8em, skipbelow=0.8em]\QuoteIcon\par\smallskip\oldquote}
+  {\endoldquote\end{mdframed}}
+
+\providecommand{\CodeLineNumberSize}{\scriptsize}
+\AtBeginDocument{
+  \definecolor{shadecolor}{HTML}{E0E0E0}
+  \renewcommand{\theFancyVerbLine}{\CodeLineNumberSize\arabic{FancyVerbLine}}
+}

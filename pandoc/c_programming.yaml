@@ -5,7 +5,7 @@ pdf-engine: xelatex
 highlight-style: tango
 
 include-in-header:
-  - head.tex
+  - pandoc/latex/head.tex
 
 filters:
   - filters/number-code-lines.lua
@@ -20,8 +20,6 @@ variables:
   colorlinks: true
   linkcolor: blue
   urlcolor: cyan
-  mainfont: Linux Libertine O
-  monofont: Fira Code
   fontsize: 10pt
   documentclass: report
   classoption: a4paper

@@ -1,7 +1,7 @@
 \newpage
 # Introduction to C
 
-- \underline{Comparision between English language and C programming language}
+- Comparision between English language and C programming language
 
 | **English Language**               | **C Language**       |
 |------------------------------------|----------------------|
@@ -56,11 +56,11 @@
 | %ju                  | uintmax_t              | Largest unsigned integer type                                   |
 
 
-## List of all operators
+## List of all Operators
 
 ![Operators](c_programming/diagrams/chapter1_introduction/operator_table.png){ width=75% }
 
-## Assignment operator
+## Assignment Operator
 
 - It requires 2 arguments
 - Left side arg must be variable
@@ -274,7 +274,7 @@ printf("%d", 5 + 2);
 printf("5 + 2");
 // 5 + 2
 
-printf(%d + %d", 5 + 2);
+printf("%d + %d", 5 + 2);
 // 7 + GV
 
 printf("%d * %d = %d", 5, 2, 5+2);
@@ -324,8 +324,38 @@ printf("%d + 1000", ts);      // 7500 + 1000
 printf("%d", ts + 1000);      // 8500
 ```
 
-## Declaration Rules
+## Variable definition Rules
 
+- Variable definition ways,
+
+```C
+// Method 1:
+int a;
+int b;
+int c;
+
+// Method 2:
+int a, b, c;
+```
+
+- In the above two style 1st style is recommanded because,
+    - Subsequent change in variable type in future is easy
+    - Writing and updating a comment is easy
+
+- ***Variable definition***: Compier allocates memory for that variable
+
+```C
+int a;
+int b = 10;
+```
+
+- ***Variable declaration***: Compier doesn't allocates memory for that variable
+
+```C
+extern int a;
+```
+
+Exmaples:
 
 ```C
 void main()
@@ -351,5 +381,260 @@ void main()
 // 5 5.5
 ```
 
+- In C programming we can assign any type of data to any type of variable. Internally in computer the compiler will take care.
+- In printf function only sutiable data is given to format specifier else garbage value is printed.
 
-## Relational & Logical Operators
+```C
+void main()
+{
+    int i;
+    i = 5.5;
+    printf("%d", i); // 5
+}
+
+void main()
+{
+    float f;
+    f = 5;
+    printf("%f", f); // 5.0
+}
+
+void main()
+{
+    int i;
+    i = 5 / 2;
+    printf("%d", i); // 2
+}
+
+void main()
+{
+    float f;
+    f = 5 / 2;
+    printf("%f", f); // 2.0
+}
+
+void main()
+{
+    int i;
+    i = 5.0 / 2;
+    printf("%d", i); // 2
+}
+
+void main()
+{
+    float f;
+    f = 5.0 / 2;
+    printf("%f", f); // 2.5
+}
+```
+
+- More examples
+
+```C
+/*************************** Valid definition *********************************/
+
+int a;
+a = 5; // Assignment
+
+int a = 5; // Initialization
+
+int a = 18 / 3 / 5;
+
+int a = 2 + 5;
+
+int a = 7.65;
+
+int a, b, c;
+a = b = c = 10; // Valid
+
+int a, b, c = a = b = 10;
+
+int a = a;
+
+int a1, b1, c1;
+
+int avgofsallary; // Valid but not readable
+
+int avg_of_salary;
+
+int a, A;
+
+char way2ms;
+
+char INT;
+
+int abcdefghijklmnopqrst;
+
+int _;
+
+char _1, _2;
+
+/******************************* Not a valid **********************************/
+int a = b = c = 10;
+
+int 1a, 1b, 1c;
+
+int avg of salary; // Not a valid. No white space allowed
+
+int if;
+
+int a + b;
+
+int a, a; // Not a valid. same name not allowed
+
+float 1606y2;
+
+int 42shared;
+
+char `a`, `b`, `c`;
+```
+
+- Rules for naming a valid variable Names:
+    - An Identifier can contain
+        - a - z
+        - A - Z
+        - 0 - 9
+        - _ (underscore)
+    - An Identifier name start with alphabet (or) underscore
+    - No whitespace, operator are allowed
+    - No keyword, but act as a pert of variable
+        - Example: `int intfloat`
+    - No restriction in length of variable name, but if length is very big then readability is less. Hence programmers recommandation is max of 15 characters
+
+```C
+int pwm_analog_read;
+int pwm_analog_write;
+int pwm_digital_read;
+int pwm_digital_write;
+```
+
+## Relational Operators
+
+| **Operator** | **Name**                 | **Description**                                                       |
+|--------------|--------------------------|-----------------------------------------------------------------------|
+| `==`         | Equal to                 | Checks whether two operands are equal                                 |
+| `!=`         | Not equal to             | Checks whether two operands are not equal                             |
+| `>`          | Greater than             | Checks whether left operand is greater than right operand             |
+| `<`          | Less than                | Checks whether left operand is less than right operand                |
+| `>=`         | Greater than or equal to | Checks whether left operand is greater than or equal to right operand |
+| `<=`         | Less than or equal to    | Checks whether left operand is less than or equal to right operand    |
+
+```C
+a = 5 + 2;   // a is int
+
+b = 1.5 * 3; // b is float
+
+c = 4 > 3;   // c and d is boolean (but not available in C)
+d = 9 < 7;
+```
+
+- The use of this operator
+    - To establish relation between two numbers and perform comparition
+    - Result of relation operation is either `true` or `false`
+    - `true` and `false` are boolean datatype but C does not support that hence
+        - `true`  = Non-zero
+        - `false` = zero
+
+```C
+void main()
+{
+    int a;
+    a = 4 > 3 > 2;
+    printf("%d", a); // 0
+}
+```
+
+- In Maths,
+    - a > b and b > C makes a > c. So a > b > c
+    - 4 > 3 and 3 > 2. So 4 > 3 > 2
+- In English, Lets take below two scentance
+    - I am watching movie
+    - I am eating popcorn
+    - Now, Lets combine two statement blindly
+        - I am watching movie eating popcorn `(meaning less)`
+    - So, I am watching movie `and` eating popcorn `(meaningful now)`
+- In C Language
+    - `4 > 3 > 2` makes result in `0` even if we think in matematically and gramatically
+    - So, `(4 > 3) && (3 > 2)` makes result `1`
+
+```C
+a = 4 + 3 > 2 + 5;
+  = 7 > 2 + 5
+  = 7 > 7
+  = 0
+
+a = 6 > 3 + 2 < 8
+  = 6 > 5 < 8
+  = 1 < 8
+  = 1
+
+a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
+// Based on the Associativity of operator all are executed from left to right
+// and last operator is !=. So result always will be 1 or 0
+```
+
+## Logical Operator
+
+- If we are combining 2 or more relation operator directly then result is unexpected
+- To overcome this C people have introduced logical operators
+- Thus use of logical operation is to combine two (or) more relational statement and to get compound statement
+
+| **Operator** | **Name**    | **Description**                                |
+|--------------|-------------|------------------------------------------------|
+| &&           | Logical AND | Returns true if both conditions are true       |
+| \|\|         | Logical OR  | Returns true if at least one condition is true |
+| !            | Logical NOT | Reverses the logical state of operand          |
+
+| **A** | **B** | **A && B** | **A \|\| B** | **!A** | **!B** |
+|-------|-------|------------|--------------|--------|--------|
+| 0     | 0     | 0          | 0            | 1      | 1      |
+| 0     | 1     | 0          | 1            | 1      | 0      |
+| 1     | 0     | 0          | 1            | 0      | 1      |
+| 1     | 1     | 1          | 1            | 0      | 0      |
+
+> - Whenever we are having 'N' condition and if we are depend on all 'N' condition at that time we are going for `AND` logic
+> - When there are 'N' condition and if we are depend on any 1 condition that time we gone for `OR` logic
+> - `NOT` is used in negative test condition
+
+- In c language every Non-zero is true
+- Zero is consider as false
+- Whenever we are not giving body for `if` then by default compiler will consider upto 1st semicolon as if body
+- In C only semicolon is valid and it is called null statement
+- The purpose of `;` is provide delay to next instruction
+
+```C
+
+void main()
+{
+    int a = 10;
+    int b = 20;
+    int max;
+
+    /* To find max of two integer using if */
+    if(a > b) {
+        max = a;
+    }
+
+    if(b > a) {
+        max = b
+    }
+
+    /* WAP to find max of 2 integer using only one if */
+    max = b;
+    if(a > b) {
+        max = a;
+    }
+
+    /* WAP to find max of 2 integer using 1 if and without 3rd variable */
+    if(a > b) {
+        b = a;
+    }
+    printf("MAX = %d", b);
+
+    /* WAP to find max of 2 integer without using any if without 3rd variable */
+    max = (a > b) * a + (b < a) * b;
+
+    /* WAP to find max of 2 integer without using any condition */
+    max = (a + b + abs(a - b)) / 2;
+}
+```
