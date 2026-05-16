@@ -1,7 +1,9 @@
 include docker/targets_docker.mk
 
 C_PROGRAMMING_CHAPTERS := $(wildcard c_programming/chapters/*.md)
-PANDOC_CONFIG := pandoc/c_programming.yaml
+C_PROGRAMMING_CONFIG := pandoc/c_programming.yaml
+RTOS_CHAPTERS := $(wildcard rtos/chapters/*.md)
+RTOS_CONFIG := pandoc/rtos.yaml
 CODE_LINE_NUMBER_SIZE ?= scriptsize
 
 environment_details:
@@ -13,9 +15,16 @@ environment_details:
 book_c_programming:
 	$(DOCKER) pandoc \
 	$(C_PROGRAMMING_CHAPTERS) \
-	--defaults=$(PANDOC_CONFIG) \
+	--defaults=$(C_PROGRAMMING_CONFIG) \
 	-V header-includes='\newcommand{\CodeLineNumberSize}{\$(CODE_LINE_NUMBER_SIZE)}' \
 	-o c_programming_book.pdf
 
+book_rtos:
+	$(DOCKER) pandoc \
+	$(RTOS_CHAPTERS) \
+	--defaults=$(RTOS_CONFIG) \
+	-V header-includes='\newcommand{\CodeLineNumberSize}{\$(CODE_LINE_NUMBER_SIZE)}' \
+	-o rtos_book.pdf
+
 clean:
-	rm -f c_programming_book.pdf
+	rm -f c_programming_book.pdf rtos_book.pdf

@@ -1,0 +1,32 @@
+toc: true
+number-sections: true
+
+pdf-engine: xelatex
+highlight-style: tango
+
+include-in-header:
+  - pandoc/latex/head.tex
+
+filters:
+  - filters/number-code-lines.lua
+
+variables:
+  geometry:
+    - margin=1in
+    - bottom=1in
+    - left=1in
+    - right=1in
+  papersize: a4
+  colorlinks: true
+  fig-pos: H
+  linkcolor: blue
+  urlcolor: cyan
+  fontsize: 10pt
+  documentclass: report
+  classoption: a4paper
+  parskip: half
+  tables: true
+
+metadata:
+  title: RTOS Book
+  author: Mohan Arunachalam

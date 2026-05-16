@@ -6,8 +6,14 @@
 \definecolor{codeblockbgcolor}{HTML}{E0E0E0}
 \definecolor{quotebgcolor}{HTML}{E0E0E0}
 \let\oldtexttt\texttt
+\usepackage{float}
 \usepackage{mdframed}
+\usepackage{placeins}
 \usepackage{tikz}
+
+\makeatletter
+\def\fps@figure{H}
+\makeatother
 
 \IfFileExists{pandoc/fonts/MonaSans-Regular.ttf}
   {\setmainfont[Path=pandoc/fonts/]{MonaSans-Regular.ttf}}
@@ -32,10 +38,11 @@
 \let\oldquote\quote
 \let\endoldquote\endquote
 \renewenvironment{quote}
-  {\begin{mdframed}[backgroundcolor=quotebgcolor, linecolor=quotebgcolor, linewidth=0pt, innertopmargin=0.8em, innerbottommargin=0.8em, innerleftmargin=1em, innerrightmargin=1em, skipabove=0.8em, skipbelow=0.8em]\QuoteIcon\par\smallskip\oldquote}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=quotebgcolor, linecolor=quotebgcolor, linewidth=0pt, innertopmargin=0.8em, innerbottommargin=0.8em, innerleftmargin=1em, innerrightmargin=1em, skipabove=0.8em, skipbelow=0.8em]\QuoteIcon\par\smallskip\oldquote}
   {\endoldquote\end{mdframed}}
 
 \providecommand{\CodeLineNumberSize}{\scriptsize}
+\providecommand{\theFancyVerbLine}{}
 \AtBeginDocument{
   \definecolor{shadecolor}{HTML}{E0E0E0}
   \renewcommand{\theFancyVerbLine}{\CodeLineNumberSize\arabic{FancyVerbLine}}
