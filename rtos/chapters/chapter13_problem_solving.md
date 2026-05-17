@@ -1,12 +1,8 @@
 \newpage
 
-# RTOS
+# Concepts and Recommandations
 
-## Fundamentals
-
-## Concepts and Recommandations
-
-### The Pitfalls of Dynamic Memory (malloc)
+## The Pitfalls of Dynamic Memory (malloc)
 
 In a standard PC application, you use malloc and free without much thought. In an RTOS, this is often forbidden or highly discouraged.
 
@@ -16,7 +12,7 @@ In a standard PC application, you use malloc and free without much thought. In a
 
 - **Solution:** Most RTOS developers use Static Allocation or Memory Pools (fixed-size blocks) to ensure memory is always available and allocation time is constant.
 
-### Task States and Timing Analysis
+## Task States and Timing Analysis
 
 Understanding the State Transition Diagram is crucial. A task isn't just "running" or "not running."
 
@@ -32,20 +28,20 @@ Understanding the State Transition Diagram is crucial. A task isn't just "runnin
 
 **The Answer:** It "starves" the system. Lower-priority tasks (including the Idle task which often handles power saving) will never get a single CPU cycle.
 
-### Queues: The Right Way to Pass Data
+## Queues: The Right Way to Pass Data
 While Semaphores are great for signals, Queues are the gold standard for data.
 
 - **Copy by Value vs. Copy by Reference:** Small data (like a sensor integer) is copied directly into the queue. For large data (like a 1MB image buffer), you put the pointer to the data in the queue.
 
 - **Thread Safety:**S Queues are internally protected by the RTOS. You don't need to wrap a queue in a Mutex; the RTOS handles the locking for you.
 
-### Software Timers vs. Hardware Timers
+## Software Timers vs. Hardware Timers
 
 - **Hardware Timers:** Use high-precision peripherals to trigger ISRs. Best for microsecond-level accuracy (e.g., PWM or high-speed sampling).
 
 - **Software Timers:** Managed by the RTOS "Timer Task." They are easier to use and don't consume hardware resources, but their accuracy is limited by the RTOS Tick Rate (usually 1ms). If your tick is 1ms, you cannot have a software timer trigger every 0.5ms.
 
-### The Tick Hook & System Heartbeat
+## The Tick Hook & System Heartbeat
 Every RTOS relies on a hardware timer (usually called the SysTick in ARM Cortex-M) to create a periodic interrupt.
 
 -  **The Problem:** You need to perform a small action (like blinking a status LED or updating a watchdog timer) every 1ms, but you don't want to create a whole new task for it.
@@ -54,7 +50,7 @@ Every RTOS relies on a hardware timer (usually called the SysTick in ARM Cortex-
 
 - **The Challenge:** Since this runs inside an ISR context, you must be extremely careful. If the Tick Hook takes too long, the whole system drifts in time.
 
-### The Idle Task & Power Management
+## The Idle Task & Power Management
 When no tasks are in the "Ready" state (e.g., everyone is blocked waiting for a sensor or a timer), the RTOS doesn't just stop. It runs the Idle Task.
 
 - **The Problem:** A battery-powered device needs to last for months. If the CPU is always "Running" (even if just in a loop), the battery will die in days.
@@ -65,16 +61,16 @@ When no tasks are in the "Ready" state (e.g., everyone is blocked waiting for a 
 
 - **The Answer:** It is always Priority 0 (the lowest). If it were higher, it would block every other task from running.
 
-### Event Groups (The "Wait for All" logic)
+## Event Groups (The "Wait for All" logic)
 Sometimes, a task needs to wait for multiple things to happen before it can proceed. For example: "Start the Motor only if (Button is Pressed) AND (Temperature is OK) AND (Safety Cover is Closed)."
 
 - **The Problem:** Using three separate semaphores is inefficient and can lead to complex code.
 
 - **The Concept:** Event Groups / Event Flags.
 
-## Problem solving
+# Problem solving
 
-### Odd / Even Print
+## Odd / Even Print
 
 - **Problem:** Create a two tasks where one task print odd number and another prints even number but while printing the numbers should be in 1, 2, 3, 4, ... and So on.
 
@@ -104,7 +100,7 @@ void Task_Even(void) {
 }
 ```
 
-### The Producer-Consumer Pattern
+## The Producer-Consumer Pattern
 
 - **The Problem:** Task A reads data from a sensor at a high frequency and places it in a shared circular buffer. Task B processes that data and sends it over UART.
 
@@ -149,7 +145,7 @@ void Consumer(void) {
 }
 ```
 
-### Queue Overflow
+## Queue Overflow
 
 - **The Problem:** A High-Priority Sensor Task is producing data faster than a Low-Priority Display Task can process and render it. Because the queue has a fixed size, it eventually hits its limit (becomes full).
 
@@ -221,7 +217,7 @@ void Display_Task(void) {
 }
 ```
 
-### Handling Shared Hardware (The Re-entrancy Problem)
+## Handling Shared Hardware (The Re-entrancy Problem)
 
 - **The Problem:** Two different tasks (High Priority and Low Priority) both need to write log messages to the same SPI Flash memory.
 
@@ -259,7 +255,7 @@ void Task_LowPriority(void) {
 }
 ```
 
-### The Deadlock Scenario
+## The Deadlock Scenario
 
 - **The Problem:** Task 1 needs Resource A then Resource B. Task 2 needs Resource B then Resource A.
 
@@ -290,7 +286,7 @@ void Task_Safe(void) {
 }
 ```
 
-### Priority Inversion:
+## Priority Inversion:
 
 - **The Problem:** A High-priority task is waiting for a Mutex held by a Low-priority task. A Medium-priority task starts running, preventing the Low-priority task from finishing and releasing the Mutex.
 
@@ -319,7 +315,7 @@ void Task_Low(void) {
 }
 ```
 
-### Interrupt to Task Communication
+## Interrupt to Task Communication
 
 - **The Problem:** An external GPIO interrupt (ISR) triggers every time a button is pressed. You want to toggle an LED in a Task.
 
