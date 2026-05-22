@@ -1,6 +1,6 @@
 \newpage
 
-# Interrupts — The Hardware's Voice
+# Interrupts
 
 > *In Chapter 1 the machine booted and ran a single loop. It worked — until we needed two things to happen at once. The hardware solves this with a mechanism that has existed since the 1950s: the interrupt. Understanding it deeply is not optional. Every RTOS is built on top of it.*
 
