@@ -13,15 +13,48 @@ import sys
 programs: dict[str, str] = {
     "program1": 
     """
-
+- Conditional
+    - Selective
+        - if
+        - if-else
+        - ternary operator
+        - switch
+    - Iterative
+        - while
+        - for
+        - do-while
+- Unconditional
+    - goto
+    - break
+    - continue
+    - return
     """,
 
     "program2":
     """
+void main()
+{
+    int a;
+    while( ) {
+        printf("A");
+    }
+}
 
+// Output
+// Compilation Error
     """,
 
     "program3":
+    """
+
+    """,
+
+    "program4":
+    """
+
+    """,
+
+    "program5":
     """
 
     """,
