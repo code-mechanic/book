@@ -11,6 +11,16 @@
 - Backed by a large industry consortium through the Linux Foundation.
 - Actively used in real-world commercial products.
 
+
+|                  | Bare metal                | FreeRTOS                          | Zephyr                                       |
+| ---              | ---                       | ---                               | ---                                          |
+| **Drivers**      | You write them            | Your code or vendor SDK           | **Built-in ecosystem, unified device model** |
+| **Build system** | Your choice               | Project specific, CMake supported | **CMake with west as meta-tool**             |
+| **Device Tree**  | No                        | No                                | **Yes**                                      |
+| **Subsystems**   | Custom or vendor specific | Optional libraries, vendor stacks | **Built-in: USB, BLE, Net, FS**              |
+| **Portability**  | You build the layer       | Broad kernel (40+ archs)          | **Broad board ecosystem (1000+ boards)**     |
+
+
 >  A modern, industry-backed RTOS for real-world IoT products.
 
 ### Where Zephyr Comes From?

@@ -13,35 +13,40 @@ import sys
 programs: dict[str, str] = {
     "program1": 
     """
-- Conditional
-    - Selective
-        - if
-        - if-else
-        - ternary operator
-        - switch
-    - Iterative
-        - while
-        - for
-        - do-while
-- Unconditional
-    - goto
-    - break
-    - continue
-    - return
+void main() {
+    int a = 5;
+
+    /*
+     1. Increment 'a' first.
+     2. Replace expression with
+        updated 'a'
+    */
+    int b = ++a;
+
+    printf("%d %d", a, b);
+
+// Output
+// 6 6
+}
     """,
 
     "program2":
     """
-void main()
-{
-    int a;
-    while( ) {
-        printf("A");
-    }
-}
+void main() {
+    int a = 5;
+
+    /*
+     1. Replace expression with
+        'a' value
+     2. Increment 'a' later.
+    */
+    int b = a++;
+
+    printf("%d %d", a, b);
 
 // Output
-// Compilation Error
+// 6 5
+}
     """,
 
     "program3":

@@ -595,3 +595,43 @@ a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
 > - Whenever we are having 'N' condition and if we are depend on all 'N' condition at that time we are going for `AND` logic
 > - When there are 'N' condition and if we are depend on any 1 condition that time we gone for `OR` logic
 > - `NOT` is used in negative test condition
+
+### Short circuit operation
+
+- In logical AND, if 1st arg is `0` then compiler will not execute 2nd and rest of args and result is zero.
+- In logical OR, if firat arg is non zero then compiler will not execute 2nd and rest of args and result is one.
+- In logical AND and logical OR, if we are able to decide the result based on 1st arg then we are bypassing the rest of args.
+
+```C
+
+/* Short circuit Concept
+
+0 && x => 0
+1 || x => 1
+- x is don't care
+
+1 && arg1 => Output
+0 || arg1 => Output
+- output depends on arg1
+*/
+```
+
+**WAP to find max of 2 integer without using if**
+
+```c
+max = a;
+b > max && (max = b);
+printf("%d", max);
+```
+
+- In C language there is order of prededance for operators but there there is no order of precedance for operand except `&&`, `||`, `?:` and `,` which evaluate operand from left to right.
+- For example `a = 2 + 3;`, here addition operation is used in which we don't 3 is taken first or 2 is taken first to CPU for addition.
+- But for above mentioned operators, the operands are compulsory execute from left to right.
+
+```c
+++x + ++y;
+// Here ++y executed first or ++x executed first? compiler depandant
+
+++x && ++y
+// here ++x only executed first
+```
