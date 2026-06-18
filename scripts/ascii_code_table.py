@@ -13,45 +13,42 @@ import sys
 programs: dict[str, str] = {
     "program1": 
     """
-void main() {
-    int a = 5;
-
-    /*
-     1. Increment 'a' first.
-     2. Replace expression with
-        updated 'a'
-    */
-    int b = ++a;
-
-    printf("%d %d", a, b);
-
-// Output
-// 6 6
+void show() {
+    printf("Hello, World!");
 }
+
+void main() {
+    show();
+}
+
+// Output:
+// Hello, World!
     """,
 
     "program2":
     """
 void main() {
-    int a = 5;
-
-    /*
-     1. Replace expression with
-        'a' value
-     2. Increment 'a' later.
-    */
-    int b = a++;
-
-    printf("%d %d", a, b);
-
-// Output
-// 6 5
+    show();
 }
+
+void show() {
+    printf("Hello, World!");
+}
+
+// Output:
+// Reclaraion error
     """,
 
     "program3":
     """
+float test() {
+    return 3.75;
+}
 
+void main() {
+    float f = test();
+    printf("%f", f);
+}
     """,
 
     "program4":

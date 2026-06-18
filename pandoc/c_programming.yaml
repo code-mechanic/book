@@ -21,7 +21,7 @@ variables:
   linkcolor: blue
   urlcolor: cyan
   fontsize: 10pt
-  documentclass: book
+  documentclass: article
   classoption: a4paper
   parskip: half
   tables: true

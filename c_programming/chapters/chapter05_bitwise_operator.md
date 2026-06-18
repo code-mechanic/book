@@ -551,7 +551,7 @@ uint32_t clear_msb_to_n_v2(uint32_t x, uint8_t n)
 
 ### Extract a bit field from a register
 
-#### Given start bit position and len
+- **Given start bit position and len**
 
 ```c
 uint32_t extract_bitfield(uint32_t reg, uint8_t start, uint8_t width)
@@ -561,7 +561,7 @@ uint32_t extract_bitfield(uint32_t reg, uint8_t start, uint8_t width)
 }
 ```
 
-#### Given start bit position and end bit position
+- **Given start bit position and end bit position**
 
 ```c
 uint32_t extract_bits(uint32_t value,
@@ -574,7 +574,7 @@ uint32_t extract_bits(uint32_t value,
 }
 ```
 
-#### Given mask and position
+- **Given mask and position**
 
 ```c
 uint32_t extract_with_cmsis_style(uint32_t reg,
@@ -587,7 +587,7 @@ uint32_t extract_with_cmsis_style(uint32_t reg,
 
 ### Insert a bit field into a register
 
-#### Given start bit position and width
+- **Given start bit position and width**
 
 ```c
 uint32_t insert_bitfield(uint32_t reg,
@@ -604,7 +604,7 @@ uint32_t insert_bitfield(uint32_t reg,
 }
 ```
 
-#### Given start bit position and end bit position
+- **Given start bit position and end bit position**
 
 ```c
 uint32_t insert_bits(uint32_t reg,
@@ -622,7 +622,7 @@ uint32_t insert_bits(uint32_t reg,
 }
 ```
 
-#### Given mask and position
+- **Given mask and position**
 
 ```c
 uint32_t insert_with_cmsis_style(uint32_t reg,

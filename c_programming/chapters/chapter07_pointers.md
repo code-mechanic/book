@@ -1,4 +1,8 @@
-## Intro to pointer
+\newpage
+
+# Pointers
+
+## Introduction to pointer
 ## Operations allowed on Pointer
 ## Sizeof Pointer
 ## Little and Big Endian Architecture
