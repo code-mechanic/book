@@ -144,7 +144,7 @@ local function render_plain_code_block(block)
     end
   end
 
-  return "{\\ttfamily\\scriptsize\\begin{tabular}[t]{@{}l@{}}"
+  return "{\\ttfamily\\footnotesize\\begin{tabular}[t]{@{}l@{}}"
     .. table.concat(lines, "\\\\\n")
     .. "\\end{tabular}}"
 end
@@ -177,7 +177,7 @@ local function render_code_block(block)
     return render_plain_code_block(block)
   end
 
-  highlighted_code_blocks[markdown] = "{\\scriptsize\n" .. latex .. "\n}"
+  highlighted_code_blocks[markdown] = "{\\footnotesize\n" .. latex .. "\n}"
   return highlighted_code_blocks[markdown]
 end
 
@@ -251,6 +251,46 @@ local function has_header(headers)
   return false
 end
 
+local function has_code_block(blocks)
+  if blocks == nil then
+    return false
+  end
+
+  for _, block in ipairs(blocks) do
+    if block.t == "CodeBlock" then
+      return true
+    end
+
+    if type(block.content) == "table" and has_code_block(block.content) then
+      return true
+    end
+  end
+
+  return false
+end
+
+local function table_has_code_block(tbl)
+  if tbl.headers ~= nil then
+    for _, cell in ipairs(tbl.headers) do
+      if has_code_block(cell) then
+        return true
+      end
+    end
+  end
+
+  if tbl.rows ~= nil then
+    for _, row in ipairs(tbl.rows) do
+      for _, cell in ipairs(row) do
+        if has_code_block(cell) then
+          return true
+        end
+      end
+    end
+  end
+
+  return false
+end
+
 local function cell_align(align)
   local name = tostring(align)
 
@@ -308,6 +348,14 @@ local function normalized_widths(widths, column_count)
   return result
 end
 
+local function table_spec(specs, outer_border_only)
+  if outer_border_only then
+    return "|" .. table.concat(specs, "") .. "|"
+  end
+
+  return "|" .. table.concat(specs, "|") .. "|"
+end
+
 local function latex_cell(cell, align)
   local lines = {
     "\\begin{minipage}[t]{\\linewidth}",
@@ -320,14 +368,19 @@ local function latex_cell(cell, align)
   return table.concat(lines, "\n")
 end
 
-local function latex_row(cells, aligns)
+local function latex_row(cells, aligns, add_bottom_line)
   local rendered_cells = {}
 
   for index, cell in ipairs(cells) do
     rendered_cells[index] = latex_cell(cell, aligns[index])
   end
 
-  return table.concat(rendered_cells, "\n&\n") .. "\n\\tabularnewline\n\\hline"
+  local row = table.concat(rendered_cells, "\n&\n") .. "\n\\tabularnewline"
+  if add_bottom_line then
+    row = row .. "\n\\hline"
+  end
+
+  return row
 end
 
 function Table(tbl)
@@ -347,11 +400,14 @@ function Table(tbl)
     specs[index] = column_spec(tbl.aligns[index], widths[index])
   end
 
+  local outer_border_only = table_has_code_block(tbl)
+  local add_row_lines = not outer_border_only
+
   local lines = {
     "\\begingroup",
     "\\setlength{\\tabcolsep}{4pt}",
     "\\renewcommand{\\arraystretch}{1.25}",
-    "\\begin{longtable}{|" .. table.concat(specs, "|") .. "|}",
+    "\\begin{longtable}{" .. table_spec(specs, outer_border_only) .. "}",
   }
 
   local caption = render_inlines(tbl.caption)
@@ -362,7 +418,7 @@ function Table(tbl)
   append(lines, "\\hline")
 
   if has_header(tbl.headers) then
-    local header = latex_row(tbl.headers, tbl.aligns)
+    local header = latex_row(tbl.headers, tbl.aligns, add_row_lines)
     append(lines, header)
     append(lines, "\\endfirsthead")
     append(lines, "\\hline")
@@ -371,7 +427,11 @@ function Table(tbl)
   end
 
   for _, row in ipairs(tbl.rows) do
-    append(lines, latex_row(row, tbl.aligns))
+    append(lines, latex_row(row, tbl.aligns, add_row_lines))
+  end
+
+  if outer_border_only then
+    append(lines, "\\hline")
   end
 
   append(lines, "\\end{longtable}")
