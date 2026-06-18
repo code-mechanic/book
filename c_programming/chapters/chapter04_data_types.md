@@ -4,7 +4,10 @@
 
 ## Number System
 
+---
+
 ### Types of Number Systems
+
 There are many number systems, but four are highly popular and essential in programming and digital electronics.
 
 | **Number System** | **Base** | **Available Digits** | **Description / Reason for Base** |
@@ -13,6 +16,8 @@ There are many number systems, but four are highly popular and essential in prog
 | **Octal** | 8 | 0, 1, 2, 3, 4, 5, 6, 7 | Base is 8 because there are 8 digits available. |
 | **Hexadecimal** | 16 | 0-9 and A, B, C, D, E, F | Hexa means 6, Decimal means 10, so Hexadecimal means 16. It is **case-insensitive** (you can use `a-f` or `A-F` mixed). |
 | **Binary** | 2 | 0, 1 | Base is 2 because there are only two possible values. |
+
+---
 
 ### Binary Terminology and Storage Units
 *   **Bits:** The values `0` and `1` are called *binary digits*. If you take "b" from binary and "it" from digits, you get the short form **bits**.
@@ -23,6 +28,8 @@ There are many number systems, but four are highly popular and essential in prog
     *   1024 Kilobytes = 1 Megabyte (MB)
     *   1024 Megabytes = 1 Gigabyte (GB)
     *   1024 Gigabytes = 1 Terabyte (TB)
+
+---
 
 ### Number System Conversions
 There are exactly 12 conversions between these 4 number systems. 
@@ -52,7 +59,10 @@ There are exactly 12 conversions between these 4 number systems.
 
 *   **Octal $\leftrightarrow$ Hexadecimal:** *There is no direct conversion.* You must first convert to Binary as an intermediate step, and then group/ungroup appropriately.
 
+---
+
 ### Representing Number Systems in C
+
 In C programming, compilers and editors cannot read subscript bases (like $135_{10}$ or $87_{16}$). Instead, C relies on specific literal formats and format specifiers.
 
 | **Number System** | **Representation in C** | **Format Specifier** | **Example** |
@@ -63,7 +73,10 @@ In C programming, compilers and editors cannot read subscript bases (like $135_{
 
 *   *Validation Note:* Writing `018` in C will cause a compilation error ("illegal octal") because 8 is not a valid octal digit. `0xBAT` is also invalid because 'T' is not a valid hexadecimal character.
 
+---
+
 ### Format Specifiers and Formatter Operations
+
 *   **Crucial Rule:** A format specifier in `printf` **does not** convert data from one data type to another. It only *formats* the existing data from one representation form to another representation form (e.g., formatting an octal-form integer into a decimal-form output).
 
 **Code Example:**
@@ -95,9 +108,12 @@ void main() {
 ```
 *Note on `%x` vs `%X`:* Using `%x` will print alphabetical hex digits in lowercase (e.g., `5d`, `1af`). Using `%X` will print them in uppercase (e.g., `5D`, `1AF`). The leading `0` or `0x` used for input representation is never printed in the output.
 
+---
+
 ## Intro To Data Types
 
 ### Prerequisite: Binary Addition
+
 Before diving into data types, understanding binary addition is crucial for programming. The principles of decimal addition apply directly to binary, but with different carry-over thresholds. 
 
 **Binary Addition Rules & Carry Logic:**
@@ -111,7 +127,10 @@ Before diving into data types, understanding binary addition is crucial for prog
 
 *Note on carries:* Just like in decimal addition (where adding to get 357 means placing 7 and carrying over 35 to the next highest place value), binary carries are passed to the next most significant bit.
 
+---
+
 ### Default Nature of a Variable
+
 When a programmer writes a simple variable declaration like `int i;`, the C compiler implicitly expands this statement.
 
 *   Internally, the compiler converts `int i;` to: **`auto short signed int i;`**.
@@ -123,14 +142,20 @@ To understand this expanded definition, we must look at the types of specifiers 
 2.  **Size / Type Specifiers (2 types):** `short`, `long` (There is no "medium" or "extra long").
 3.  **Sign / Type Specifiers (2 types):** `signed`, `unsigned`.
 
+---
+
 ### Understanding MSB and LSB
+
 *   **MSB (Most Significant Bit):** The bit that has the **highest power** (not strictly the "leftmost" bit, though it often appears there).
 *   **LSB (Least Significant Bit):** The bit that has the **lowest power**.
 *   *Crucial Compiler Shortcut:* 
     *   If a data type is **`signed`**, the compiler considers the MSB as **negative**.
     *   If a data type is **`unsigned`**, the compiler considers the MSB as **positive**.
 
+---
+
 ### Signed Data Type Analysis
+
 Assuming a `signed` data type of size 4 bits:
 
 ```c
@@ -171,7 +196,10 @@ Assuming a `signed` data type of size 4 bits:
 *   The **Minimum** value is always `1` followed by all `0`s (e.g., `1000`).
 *   The value **`-1`** is always represented by **all `1`s** (e.g., `1111`).
 
+---
+
 ### Unsigned Data Type Analysis
+
 Assuming an `unsigned` data type of size 4 bits:
 
 ```c
@@ -206,7 +234,7 @@ Assuming an `unsigned` data type of size 4 bits:
 
 *Use Case Rule:* Use `unsigned` when dealing with strictly positive values (like bank balances). Use `signed` when values can fluctuate between positive and negative (like temperature).
 
-\newpage
+---
 
 ### Summary Comparison Table
 
@@ -218,7 +246,10 @@ Assuming an `unsigned` data type of size 4 bits:
 | **Maximum Binary Value** | `0` followed by all `1`s | All `1`s |
 | **Meaning of "All 1s"**| Equals `-1` | Equals the Maximum Value |
 
+---
+
 ### Important Powers of 2 to Remember
+
 Memorizing these powers of 2 is highly beneficial for future operations:
 
 *   $2^7 = 128$
@@ -228,6 +259,7 @@ Memorizing these powers of 2 is highly beneficial for future operations:
 *   $2^{16} = 65,536$
 *   $2^{31} = 2,147,483,648$
 
+---
 
 ## Signed char Data Type
 
@@ -239,6 +271,8 @@ Memorizing these powers of 2 is highly beneficial for future operations:
 *   **Exact Range:** **`-128` to `127`**. The 8-bit space is split equally between positive and negative values.
 *   **Format Specifier:** `%c` is used to print characters.
 
+---
+
 ### Character Constants & ASCII Values
 
 *   A character constant is any content represented inside a pair of single quotes (e.g., `'A'`). The content inside the single quotes must have a length of exactly one.
@@ -246,6 +280,8 @@ Memorizing these powers of 2 is highly beneficial for future operations:
 *   **Important ASCII Values to Remember:**
     *   `'A'` = 65, `'B'` = 66, `'C'` = 67 ... `'Z'` = 90.
     *   `'a'` = 97, `'b'` = 98, `'d'` = 100 ... `'z'` = 122.
+
+---
 
 ### Assigning Different Data Types to char
 
@@ -255,6 +291,8 @@ In C, you can assign integer or even float data to a character variable. The com
 char ch1 = 97;      // Valid. Internally stores small 'a'
 char ch2 = 100.75;  // Valid. Float is truncated to 100, which internally stores 'd'
 ```
+
+---
 
 ### Understanding Format Specifiers & Internal Representations
 
@@ -268,6 +306,8 @@ A highly critical concept is that a **format specifier does not convert data**; 
 *   **Garbage Values:** 
     *   If you supply a float value (IEEE 754 data) but use `%c` or `%d`, it tries to print standard binary data, resulting in a **garbage value**.
     *   Conversely, if you supply character/integer data (binary data) but use `%f`, it expects IEEE 754 data, also resulting in a **garbage value**.
+
+---
 
 ### Out of Range Assignments (The "Butterfly Diagram" Logic)
 
@@ -311,6 +351,8 @@ If a programmer tries to assign `128` to a `signed char` (which is out of range)
 ```
 Whenever a value crosses the upper bound of the positive range (`127`), it wraps around and continues from the negative bound (`-128`) upwards. Conversely, if a value crosses the lower bound of the negative range (`-128`), it wraps around to the maximum positive value (`127`) and counts downwards. The number of steps you cross out of bounds dictates how many steps you take from the opposite end.
 
+---
+
 ## Unsigned char Data Type
 
 ### Basic Properties
@@ -325,7 +367,10 @@ Whenever a value crosses the upper bound of the positive range (`127`), it wraps
 *   **Format Specifier:** `%c` is used to print characters.
 *   **Character Constants:** Any content represented inside a pair of single quotes (e.g., `'A'`, `'+'`, `'D'`, `'9'`, `'K'`) is considered a character constant. *(Note: The specific use cases for choosing between signed and unsigned characters will be deeply explored in later concepts like Strings)*.
 
+---
+
 ### Out of Range Assignments (The Butterfly Diagram)
+
 Just like `signed char`, if you assign a value to an `unsigned char` that falls outside of its `0` to `255` boundary, the compiler does not generate an error. Instead, it performs a cyclical wrap-around, which can be visualized using the "Butterfly Diagram".
 
 **Code Example:**
@@ -364,18 +409,26 @@ When `-1` is assigned to `ch`, the compiler recognizes it is out of bounds. Ther
 
 *Rule of Thumb:* Whenever the value is not in the valid range, you must use the butterfly diagram (wrap-around logic) to determine the equivalent internal value.
 
+---
+
 ## Short int Data Type
 
 This section covers both the signed and unsigned versions of the `short int` data type, detailing their behaviors, ranges, and crucial rules like the Type Promotionality Rule.
 
+---
+
 ### Basic Properties (Signed Short Integer)
+
 *   **Default Nature:** If you write `int`, the compiler considers its default nature to be `signed` and `short`. You can declare it in several interchangeable ways: `short`, `signed`, `short int`, `signed short`, or `int signed short`. In all these cases, the order of keywords does not matter; the compiler treats them all as a 16-bit signed integer.
 *   **Size:** 16 bits.
 *   **Range Calculation:** Using the formula $-2^{n-1}$ to $2^{n-1} - 1$ (where $n = 16$), the range is $-2^{15}$ to $2^{15} - 1$.
 *   **Exact Range:** **`-32768` to `32767`**.
 *   **Format Specifier:** `%d` (decimal) or `%i` (integer).
 
+---
+
 ### Basic Properties (Unsigned Short Integer)
+
 *   **Default Nature:** To use the unsigned version, the `unsigned` keyword is mandatory. You can declare it as `unsigned int`, `unsigned short`, or simply `unsigned`. 
 *   **Size:** 16 bits.
 *   **Range Calculation:** Using the formula $0$ to $2^n - 1$, the range is $0$ to $2^{16} - 1$.
@@ -383,8 +436,10 @@ This section covers both the signed and unsigned versions of the `short int` dat
 *   **Format Specifier:** `%u`.
 *   **Unsigned Constants:** To explicitly represent a number as an unsigned integer constant, you append a `u` or `U` to the end of the number (e.g., `5U`, `100u`, `0xFU`).
 
+---
 
 ### Out of Range Assignments (The Butterfly Diagram)
+
 Whenever you assign a value that exceeds the boundaries of a data type, the compiler does not throw an error; instead, it performs a wrap-around.
 
 **1. Signed `short int` Wrap-Around:**
@@ -429,7 +484,10 @@ void main() {
 
 If you assign `-1` to an `unsigned short` variable, it falls one step below the minimum boundary of `0`. Wrapping backwards, it takes the maximum possible value for that data type, resulting in **`65535`**.
 
+---
+
 ### The Type Promotionality Rule (Important Concept)
+
 A highly critical rule in C operations is the **Type Promotionality Rule**: Whenever you perform an operation (like addition or comparison), both arguments must be of the same data type. If they are not, the compiler automatically 
 
 **promotes the lower data type to the higher data type**.
@@ -452,7 +510,10 @@ if (s >= u) {
 *   *Common Misconception:* A programmer might look at `-2 >= 3` and assume it is `False`, printing "Hi".
 *   *Actual Compiler Logic:* Because `s` is signed and `u` is unsigned, `s` is promoted to the higher data type (`unsigned`). The internal unsigned equivalent of `-2` is `65534`. The compiler evaluates `65534 >= 3`, which is **True**, printing **"Hello"**.
 
+---
+
 ### The Unsigned Infinite Loop Trap
+
 Using `unsigned` variables in loop conditions can lead to unexpected infinite loops.
 
 **Code Example:**
@@ -464,6 +525,8 @@ for (u = 5; u >= 0; u--) {
 ```
 
 *   *Why it is an infinite loop:* The loop correctly counts down from `5` to `0`. However, when `u` is `0` and decrements by 1 (`u--`), it does not become `-1`. Because it is an unsigned variable, it wraps around to **`65535`**. Since `65535` is strictly `>= 0`, the loop condition remains true. An unsigned variable can *never* be less than 0, meaning the condition `u >= 0` is permanently valid.
+
+---
 
 ## Long int Data Type
 
@@ -477,6 +540,8 @@ This lecture covers the `long int` data type, introduces the concept of Type Cas
     *   **Exact Range:** **`-2147483648` to `2147483647`**.
 *   **Format Specifier:** `%ld` (`l` for long, `d` for decimal) or `%li` (`i` for integer).
 
+---
+
 ### Basic Properties (Unsigned Long Integer)
 
 *   **Default Nature:** To make it unsigned, the `unsigned` keyword is compulsory. You can declare it as `unsigned long int` or `unsigned long`.
@@ -485,7 +550,10 @@ This lecture covers the `long int` data type, introduces the concept of Type Cas
     *   **Exact Range:** **`0` to `4294967295`**.
 *   **Format Specifier:** `%lu` (or some compilers allow `%ul`).
 
+---
+
 ### Long Constants and Suffixes
+
 When writing numeric constants, the compiler assigns them a data type automatically based on their value, or you can explicitly enforce a type using suffixes.
 
 *   **`5`**: Standard integer.
@@ -497,7 +565,10 @@ When writing numeric constants, the compiler assigns them a data type automatica
     *   `40000U`: This is considered an `unsigned short` (because the `unsigned short` limit is `65535`). To make it long, you must write `40000UL`. 
     *   `75000U`: Since it crosses `65535`, it is automatically treated as an `unsigned long`.
 
+---
+
 ### Type Casting (Type Conversion)
+
 Type casting is the process of converting one type of data to another type of data. 
 
 **The Problem Scenario:**
@@ -523,7 +594,10 @@ float average = (float)total / 3;
     *   *Example:* `(int)5.5 % 2` $\rightarrow$ The cast happens first. `5 % 2` evaluates to `1`.
     *   *Nested Casts:* `(char)(int)100.75` $\rightarrow$ First evaluates to `(char)100`, which converts the integer `100` into the ASCII character `'d'`.
 
+---
+
 ### Compiler Architecture and the "Plain int"
+
 A highly critical concept in C is that **the size of a plain `int` is the same as the compiler's bit length**. 
 
 | Feature | 16-bit Compiler (e.g., Turbo C / DOS) | 32-bit Compiler (e.g., GCC / Linux) |
@@ -548,11 +622,16 @@ In newer 64-bit architectures, plain `int` is typically restricted to 4 bytes to
 *   *Use Cases:* This 8-byte format is heavily used in TCP/UDP networking packet structures and embedded electronics protocols (like the CAN protocol).
 *   *Constants:* `5LL` (long long int), `0xFULL` (Hex unsigned long long).
 
+---
+
 ### Cross-Platform Wrap-Around Examples
+
 Because `int` size varies by compiler, addition logic behaves differently depending on the architecture:
 
 *   `32767 + 1` in Turbo C (16-bit): Both are 2 bytes. The max bound `32767` is crossed, triggering the butterfly wrap-around. The result is `-32768`.
 *   `32767 + 1` in GCC (32-bit): Since `int` is 4 bytes (acting as long), the maximum bound is 2 billion. Therefore, `32767 + 1` easily fits inside the range, simply resulting in `32768`.
+
+---
 
 ## Floating-point Datatypes
 
@@ -563,6 +642,8 @@ This subsection covers how C handles decimal values, the IEEE 754 standard for i
 *   **Crucial Rule:** In C, any decimal point number (e.g., `0.6`, `5.82`, `-18.9`) is considered a **`double`** by default, not a `float`.
 *   To explicitly define a decimal number as a `float`, you must append an `f` or `F` to the end of the number (e.g., `3.5F` or `-2.512F`).
 *   To define a decimal number as a `long double`, you append an `L` (e.g., `3.5L`).
+
+---
 
 ### Binary Conversion of Fractional Numbers
 
@@ -582,7 +663,10 @@ To convert a fractional decimal number to binary, you multiply it by 2, record t
     *   `0.6 * 2 = 1.2` $\rightarrow$ Take `1`, loop repeats.
     *   The binary value is `0.100110011...` extending to infinite bits.
 
+---
+
 ### IEEE 754 Standard and Precision
+
 Because storing infinite bits for numbers like `0.6` would consume the entire memory, a committee introduced the **IEEE 754 Standard** floating-point representation to store these numbers in a finite, standardized format. 
 
 Both `float` and `double` are divided into three parts: a Sign bit, an Exponent (integral part), and a Mantissa (fractional part).
@@ -597,7 +681,10 @@ Both `float` and `double` are divided into three parts: a Sign bit, an Exponent 
 
 *   **Precision Definition:** Precision refers strictly to the number of bits allocated to represent the fractional part (Mantissa) of the number, not the number of visual decimal digits printed. Using 23 bits is called "single precision" while using 52 bits is called "double precision".
 
+---
+
 ### The Comparison Trap (Precision Loss)
+
 Assigning a double-precision value to a single-precision variable can cause subtle, critical bugs due to **precision loss**.
 
 **Code Example:**
@@ -627,7 +714,10 @@ if (f2 == 0.6) {
 4.  *Why did `0.125` work?* `0.125` completely resolves in just 3 bits. Truncating it from 52 bits down to 23 bits only chops off trailing zeros, meaning exactly zero value is lost. Thus, the comparison remains `True` ("Hello").
 *   *Conclusion:* Never assign double-precision data to a single-precision variable if you plan on doing exact equality comparisons, as precision loss is highly probable.
 
+---
+
 ### Summary of Floating-Point Properties
+
 The absolute sizes and ranges depend on the compiler's machine architecture. However, the standard representations are as follows:
 
 | Data Type | Size | Range | Format Specifiers | Example Assignment |
@@ -637,6 +727,8 @@ The absolute sizes and ranges depend on the compiler's machine architecture. How
 | **`long double`** | 80-bit | $3.4 \times 10^{4932}$ to $3.4 \times 10^{4932}$ | `%Lf`, `%Le`, `%Lg` | `3.5L`, `18.263L` |
 
 *(Note: `%lf` stands for "long float", which was the historical name used for double in older C standards).*
+
+---
 
 ## Sizeof Operator
 
@@ -648,6 +740,8 @@ This subsection of the Data Types chapter covers the `sizeof` operator, a powerf
 *   If a programmer needs to know the exact size of a specific data type on the current machine architecture, they must use the `sizeof` operator.
 *   **Functionality:** Just as the addition operator yields a sum, `sizeof(X)` yields the size of `X` in the number of bytes.
 
+---
+
 ### Valid Arguments for the sizeof Operator
 
 The argument `X` provided to the `sizeof` operator can be one of four things:
@@ -657,6 +751,8 @@ The argument `X` provided to the `sizeof` operator can be one of four things:
 3.  **Constant:** (e.g., `sizeof(5)`)
 4.  **Expression:** (e.g., `sizeof(a + b)`)
 *   *Invalid Example:* Writing `sizeof(if)` will result in a compilation error because `if` is a keyword, not a data type, variable, constant, or expression.
+
+---
 
 ### Size of Data Types and Variables
 
@@ -668,6 +764,8 @@ When passing standard data types or variables, the operator returns the byte siz
 *   `sizeof(float)` $\rightarrow$ `4`.
 *   `sizeof(double)` $\rightarrow$ `8`.
 
+---
+
 ### Size of Constants
 
 When you pass a constant value, the compiler evaluates the default data type of that constant and returns its size:
@@ -677,6 +775,8 @@ When you pass a constant value, the compiler evaluates the default data type of 
 *   `sizeof(3.75)` $\rightarrow$ Decimal point numbers default to `double`, returns `8`.
 *   `sizeof(3.75F)` $\rightarrow$ The `F` suffix makes it a `float`, returns `4`.
 *   `sizeof(3.75L)` $\rightarrow$ The `L` suffix makes it a `long double`, returns `10` or `16` (machine dependent).
+
+---
 
 ### Size of Expressions (The "No-Execution" Rule)
 
@@ -714,7 +814,10 @@ sizeof(4.75 > 2.5);
 *   The expression inside must be syntactically valid. `sizeof(5.0 % 2)` results in a compilation error because modulus operations cannot be applied to floating-point numbers.
 *   `sizeof(5 / 0)` is syntactically valid (`int` / `int`). Because the operator does not execute the expression, it does not throw a runtime division-by-zero error. It simply returns the size of an `int` (`2` or `4`).
 
+---
+
 ### The Type Promotionality Trap with sizeof
+
 The `sizeof` operator always returns a size, and a memory size is always a strictly positive number. Therefore, the return type of `sizeof` is implicitly an **`unsigned` integer** (also internally defined as `size_t`).
 
 This leads to a famous interview trap using the Type Promotionality Rule:
@@ -729,5 +832,8 @@ if (sizeof(int) > -1) {
 *   *Logical Assumption:* `sizeof(int)` is `2`. `2 > -1` is mathematically True, so it should print "Hello".
 *   *Actual Compiler Logic:* `-1` is a signed negative number. `sizeof` returns an `unsigned` positive number. When comparing different data types, the compiler promotes the lower type (`signed`) to the higher type (`unsigned`). The internal unsigned equivalent of `-1` is `65535`. The compiler evaluates `2 > 65535`, which is **False**, resulting in **"Hi"**.
 
+---
+
 ### Operator Priority
+
 The `sizeof` operator resides at the highest level of operator priority, sharing precedence with unary operators like logical NOT (`!`), increment/decrement (`++`, `--`), unary plus/minus (`+`, `-`), and Type Casting. It is evaluated before multiplication, division, addition, and relational checks.

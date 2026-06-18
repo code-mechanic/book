@@ -55,10 +55,13 @@
 | %jd                  | intmax_t               | Largest signed integer type                                     |
 | %ju                  | uintmax_t              | Largest unsigned integer type                                   |
 
+---
 
 ## List of all Operators
 
 ![Operators](c_programming/diagrams/chapter1_introduction/operator_table.png){ width=75% }
+
+---
 
 ## Assignment Operator
 
@@ -100,6 +103,8 @@ a = -b; // a = 9
     - because `.` is used as decimal point in float number
 - What is l-value error?
     - On the left hand side of assignment operation we should provide a variable but by mistake if we provide constant (or) expression then we get l-value required error.
+
+---
 
 ## Arithmetic Operators
 
@@ -194,6 +199,8 @@ a = 3.5 * 2 % 7; // Compilation error
 - `Condition 3`: When numerator is smaller then denominator then result is numerator
 - `Condition 4`: When numerator is equal to denominator then result is zero
 
+---
+
 ## C-Tokens
 
 - Smallest individual unit in C language is called C-Token
@@ -220,6 +227,8 @@ void main()
     - Constant    : `"Hello"`
     - Identifiers : `main` `printf`
 - Total `11` C-Tokens are there in above program
+
+---
 
 ## printf function
 
@@ -323,6 +332,8 @@ printf("Total sal = %d", ts); // Total sal = 7500
 printf("%d + 1000", ts);      // 7500 + 1000
 printf("%d", ts + 1000);      // 8500
 ```
+
+---
 
 ## Variable definition Rules
 
@@ -508,6 +519,8 @@ int pwm_digital_read;
 int pwm_digital_write;
 ```
 
+---
+
 ## Relational Operators
 
 | **Operator** | **Name**                 | **Description**                                                       |
@@ -573,6 +586,8 @@ a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
 // and last operator is !=. So result always will be 1 or 0
 ```
 
+---
+
 ## Logical Operator
 
 - If we are combining 2 or more relation operator directly then result is unexpected
@@ -595,6 +610,8 @@ a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
 > - Whenever we are having 'N' condition and if we are depend on all 'N' condition at that time we are going for `AND` logic
 > - When there are 'N' condition and if we are depend on any 1 condition that time we gone for `OR` logic
 > - `NOT` is used in negative test condition
+
+---
 
 ### Short circuit operation
 

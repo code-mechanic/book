@@ -180,6 +180,8 @@ void main()
 }
 ```
 
+---
+
 ## if-else Conditional Construct
 
 **Syntax**
@@ -349,6 +351,8 @@ printf("%d %d %d", a, b, c);
 // 10 30 1
 ```
 
+---
+
 ## conditional Operator
 
 ```c
@@ -433,6 +437,8 @@ a = 4 > 7 ? 40 : 50
 // Output
 // 50
 ```
+
+---
 
 ## while loop
 
@@ -581,6 +587,8 @@ printf("%d %d", a + 10, b + 10);
 */
 ```
 
+---
+
 ## Nested while Loops
 
 **Syntax**
@@ -705,6 +713,8 @@ while(k <= 5) {
 */
 ```
 
+---
+
 ## For loop
 
 **Syntax**
@@ -786,6 +796,8 @@ void main()
 > If we don't know number of iteration in advance then use `while` loop  
 > - **Example:** To process linked list elements
 
+---
+
 ## do while Loop
 
 **Syntax**
@@ -847,6 +859,8 @@ while(a++ <= 14); // Outer loop
 printf("%d", a);
 ```
 
+---
+
 ## Break
 
 If program execution encounter `break` keyword inside loop then it comes out of loop.
@@ -905,10 +919,14 @@ if(n % 2 == 0) {
 }
 ```
 
+---
+
 ## Continue
 
 This is used to skip the statements inside loops.
 `contine` keyword must be inside loops apart from the usage is compilation error.
+
+---
 
 ## goto
 
@@ -1125,6 +1143,8 @@ void main() {
 // Output
 // Compilation error
 ```
+
+---
 
 ## Switch
 
@@ -1407,6 +1427,8 @@ void main() {
 // Output
 // ACDB
 ```
+
+---
 
 ## Summary of Flow Control
 

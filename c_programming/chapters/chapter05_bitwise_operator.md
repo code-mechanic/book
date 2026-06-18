@@ -38,6 +38,8 @@ if int datatype = 2 bytes
 - If MSB = 0, then number is +ve and it is original data
 - If MSB = 1, then number is -ve and number is in 2's complement.
 
+---
+
 ### Binary(2's complement) to decimal
 
 - If MSB = 0, Convert normally from binary to decimal.

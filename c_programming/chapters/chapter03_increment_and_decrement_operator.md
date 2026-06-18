@@ -23,6 +23,8 @@
 | ```                            |   |                                                |
 +--------------------------------+---+------------------------------------------------+
 
+---
+
 ## Increment operator
 
 +---------------------------------+---+---------------------------------+
@@ -49,6 +51,8 @@
 
 - Here both are incrementing but increment time is different.
 
+---
+
 ## Decrement operator
 
 +---------------------------------+---+---------------------------------+
@@ -72,6 +76,8 @@
 |                                 |   |                                 |
 | ```                             |   | ```                             |
 +---------------------------------+---+---------------------------------+
+
+---
 
 ## Examples
 
@@ -179,6 +185,8 @@ void main() {
 // Output
 // Compilation Error: Increment not possible on constant
 ```
+
+---
 
 ### Examples with flow control
 
@@ -339,6 +347,8 @@ void main() {
 // Output
 // 2 5 8 9 11 12
 ```
+
+---
 
 ### Examples with Logical operator
 
@@ -533,6 +543,8 @@ void main() {
 */
 }
 ```
+
+---
 
 ### Examples with flow control and logical operator
 

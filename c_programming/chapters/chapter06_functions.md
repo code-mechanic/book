@@ -4,6 +4,8 @@
 
 ## Introduction to Functions
 
+---
+
 ### The Importance and Purpose of Functions
 
 *   The concept of functions is not unique to C programming; if you understand functions in C, migrating to object-oriented languages like C++, Java, or Python is much easier, as the core concept remains the same.
@@ -200,6 +202,8 @@ If a function call appears above its definition, a compilation error occurs.
 *   **Global Declaration:** Writing the declaration outside of all curly braces ensures all functions below it have access to the prototype information.
 
 ## Introduction to auto (Storage Classes)
+
+---
 
 ### Storage Classes Overview
 Storage classes dictate the specific behaviors of variables in memory. Every variable in C possesses four distinct properties based on its storage class:
@@ -400,6 +404,8 @@ void main() {
 
 ## Static Storage Class
 
+---
+
 ### Basic Properties of *static*
 
 Before diving into code, it is essential to understand the three core properties of a `static` variable:
@@ -531,6 +537,8 @@ Many programmers mistakenly believe the English meaning of "static" is "constant
 *   In C programming, the English meaning of static is **"fixed"**. Once the variable is created, its memory block is permanently fixed for all calls of that function and is not destroyed until the program entirely closes.
 
 ## Extern Storage Class
+
+---
 
 ### The Precursor: Global Variables
 
@@ -664,6 +672,8 @@ void main() {
 
 ## Compilation Process (The Build Process)
 
+---
+
 ### Overview of the Build Process
 
 Whenever you write code in a text editor, you create a source code file (e.g., `A.c`). This code is understandable by the programmer, but not by the machine. The complete process of converting programmer-understandable code to machine-understandable executable code is called the **Compilation Process** or **Build Process**. 
@@ -791,6 +801,8 @@ void main() {
 ```
 
 ## Extern MultiFile Programming
+
+---
 
 ### Internal Conversions and Default Classes
 
@@ -1066,6 +1078,8 @@ To summarize the exact architectural choices a programmer makes when deciding wh
 
 ## Memory Segments (Process Image)
 
+---
+
 ### Introduction to the Process Image
 
 A program running in the background or stored on a hard disk is just a file, but a **program under execution on the RAM is called a process**. Whenever a process executes, the operating system allocates memory on the RAM in a highly structured way. This structure is called the **Memory Layout of a Process** or the **Process Image**. 
@@ -1295,6 +1309,8 @@ When the Linker combines `1.obj` and `2.obj`, it cannot put both variable `A` an
 This same address resolution logic is strictly applied to the merging of the **Code Segments** as well.
 
 ## Register Storage Class
+
+---
 
 ### The Stack Overhead Problem
 
