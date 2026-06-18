@@ -9,6 +9,7 @@ include-in-header:
 
 filters:
   - filters/number-code-lines.lua
+  - filters/boxed-tables.lua
 
 variables:
   geometry:
