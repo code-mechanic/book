@@ -337,9 +337,416 @@ Whenever you are evaluating an expression strictly involving **two pointers** (e
 6.  **Bitwise (`<<`, `>>`):** **INVALID**.
 7.  **Assignment (`=`):** **VALID** (Copies the address).
 
+---
+
 ## Sizeof Pointer
+
+### The Core Rule of Pointer Sizes
+
+When working with pointers, it is critical to understand that the size of the pointer is **not** determined by the data type it points to. Whether a pointer stores the address of a 1-byte `char`, a 2-byte `int`, or a 4-byte `float`, an address is ultimately just a number. Because the address template is fixed, the size of all pointers on a specific machine is strictly identical. 
+
+*Assumption: For the code examples below, we are operating on a 16-bit compiler (like Turbo C) where an address takes exactly 2 bytes.*
+
+---
+
+### Tracing *sizeof* Across Data Types
+
+Using the `sizeof()` operator on a variable, its pointer, and its dereferenced value yields distinct results that you must memorize for interviews.
+
+**Concept Code: Tracing Integer Sizes**
+```c
+void main() {
+    int i = 10;
+    int *IP = &i;
+    /*
+    i  = 10  [0x500]
+    IP = 500 [0x...]
+    */
+    
+    // sizeof(i)     => 2 bytes (Size of integer)
+    // sizeof(IP)    => 2 bytes (Size of integer pointer)
+    // sizeof(*IP)   => 2 bytes (Size of value at 500, which is int)
+    // sizeof(int)   => 2 bytes
+    // sizeof(int *) => 2 bytes
+}
+```
+
+**Concept Code: Tracing Character Sizes**
+```c
+void main() {
+    char ch = 'A';
+    char *CP = &ch;
+    /*
+    ch = 'A' [0x600]
+    CP = 600 [0x...]
+    */
+    
+    // sizeof(ch)     => 1 byte  (Size of character)
+    // sizeof(CP)     => 2 bytes (Size of character pointer!)
+    // sizeof(*CP)    => 1 byte  (Size of value at 600, which is char)
+    // sizeof(char)   => 1 byte
+    // sizeof(chat *) => 1 byte
+}
+```
+
+**Concept Code: Tracing Float Sizes**
+```c
+void main() {
+    float f = 3.75;
+    float *FP = &f;
+    /*
+    f  = 3.75 [0x700]
+    FP = 700  [0x...]
+    */
+    
+    // sizeof(f)       => 4 bytes (Size of float)
+    // sizeof(FP)      => 2 bytes (Size of float pointer!)
+    // sizeof(*FP)     => 4 bytes (Size of value at 700, which is float)
+    // sizeof(float)   => 2 bypes
+    // sizeof(float *) => 2 bytes
+}
+```
+
+---
+
+### Compiler and Architecture Dependency
+
+If the size of a pointer does not depend on the data type, what *does* it depend on? The size of a pointer is strictly dependent on the **number of address lines** the compiler/microprocessor uses to generate memory addresses.
+
+*   **Turbo C (16-bit):** Uses 16 address lines. It can generate addresses from `0` to `65,535` ($2^{16} - 1$). To store this maximum value, it strictly requires **2 bytes**. 
+*   **GCC (32-bit / x86):** Uses 32 address lines. It can generate addresses from `0` to ~`4.29 billion`. To store this massive address, it strictly requires **4 bytes**.
+*   **GCC (64-bit):** Uses 64 address lines. Size of any pointer becomes **8 bytes**.
+
+---
+
+### Virtual Address vs. Actual Address
+
+In a 16-bit compiler, the address range is limited to `0 to 65,535`. If an application exceeds this, the OS intervenes using memory segments. 
+
+*   The addresses we interact with in C (e.g., `500`) are actually **Virtual Addresses** (also called Offsets). 
+*   The actual physical hardware address is dynamically calculated by the Operating System using the following formula:
+
+    > **Actual Address = (Segment Number * Bytes Per Segment) + Offset**
+
+**OS Memory Segmentation Diagram:**
+
+```text
++-----------------------+  <-- Segment 0 
+| Address: 0            |
+| ...                   |
+| Address: 500          |  <-- Virtual Address (Offset)
+| ...                   |
+| Address: 65535        |
++-----------------------+
++-----------------------+  <-- Segment 1
+| Address: 0            |
+| ...                   |
+| Address: 500          |  <-- Virtual Address (Offset)
+| ...                   |
+| Address: 65535        |
++-----------------------+
++-----------------------+  <-- Segment 2
+| Address: 0            |
+| ...                   |
+| Address: 500          |  <-- Virtual Address (Offset)
+| ...                   |
+| Address: 65535        |
++-----------------------+
+```
+
+---
+
+### Increment Behavior vs. Pointer Size
+
+A very common interview trap is asking: *"If a character pointer is 2 bytes in size, why does `CP++` only increment the address by 1?"*.
+
+*   **The Answer:** A pointer's increment behavior is completely independent of its physical memory size. While the pointer itself takes 2 bytes to store the address number, the operation `++` strictly instructs the compiler to move to the **next element address**. Therefore, the increment is entirely dependent on the pointer's *data type*, not its *size*.
+
+**Concept Code: Tracing Increments Across Types**
+
+```c
+void main() {
+    int i = 10, *IP = &i;     // Assume 'i' address is 500
+    char ch = 'A', *CP = &ch; // Assume 'ch' address is 600
+    float f = 3.7, *FP = &f;  // Assume 'f' address is 700
+    /*
+    IP = 500 [0x...]
+    CP = 600 [0x...]
+    FP = 700 [0x...]
+    */
+    
+    // IP points to int (2 bytes). Moves 2 bytes forward.
+    IP++; 
+    
+    // CP points to char (1 byte). Moves 1 byte forward.
+    CP++; 
+    
+    // FP points to float (4 bytes). Moves 4 bytes forward.
+    FP++; 
+    /*
+    IP = 502 [0x...]
+    CP = 601 [0x...]
+    FP = 704 [0x...]
+    */
+}
+```
+
+> If pointer arthmatic with integer happens then below is the generic formula
+>
+> **New Address = Current Address ± ( sizeof(pointer DataType) × N )**
+
+---
+
+### Summary keypoints
+
+Based on the rules of `sizeof` and pointers, memorize these true/false evaluations:
+
+1.  **Size of a pointer is dependent on data type:** **FALSE** (It strictly depends on compiler architecture).
+2.  **Size of a pointer is always 2 bytes:** **FALSE** (It can be 4 or 8 bytes on modern compilers).
+3.  **Size of a pointer is dependent on compiler:** **TRUE**.
+4.  **Increment on a pointer is dependent on the size of the pointer:** **FALSE**.
+5.  **Increment on a pointer is dependent on the type of the pointer:** **TRUE** (e.g., `char*` increments by 1, `float*` increments by 4).
+
+---
+
 ## Little and Big Endian Architecture
-## void pointer
+
+### Pointer Casting and Byte Extraction
+
+Before understanding architecture, we must understand how pointers of different sizes interact. In C, you can assign an integer address to a character pointer. However, because a `char*` only has the capability to point to **1 byte** of memory, it will only read the very first byte of the integer, ignoring the rest.
+
+**Concept Code: Extracting Bytes from an Integer**
+
+```c
+void main() {
+    int a = 511; // 511 in 16-bit binary: 0000 0001 1111 1111
+    int b;
+    char *cp = (char*)&a; // Warning safely bypassed with cast
+    /*
+    a  = 511 [0x500]
+    cp = 500 [0x...]
+    */
+    
+    // 'cp' points to the first byte only (1111 1111).
+    // In a signed char, all 1s represents -1.
+    b = *cp;
+    /*
+    b  = -1  [0x600]
+    */
+    
+    printf("%d", b); // Prints: -1
+}
+```
+
+**Concept Code: Extracting Bytes from an long Integer**
+
+```c
+/* ========================================================================
+ * HEXADECIMAL BYTE EXTRACTION (Pointer Type Trace)
+ * ------------------------------------------------------------------------
+ * A long integer requires 4 bytes. Different pointer types increment 
+ * based on their size, fundamentally altering how data is traversed.
+ * 
+ * Assuming Little Endian, 0x12345678 is stored backwards byte-by-byte:
+ * [0x500] = 78, [0x501] = 56, [0x502] = 34, [0x503] = 12
+ * ======================================================================== */
+void hex_extraction() {
+    long l = 0x12345678;
+    /*
+    l  = 12345678 [0x500] 
+    */
+    
+    // --- Tracing Character Pointer (1 Byte Capability) ---
+    // A char pointer only increments by 1 byte at a time.
+    char *cp = (char*)&l;
+    /*
+    cp = 500      [0x...]
+    */
+    
+    // It strictly requires TWO increments to reach address 502.
+    ++cp; // Moves by sizeof(char) = 1 byte -> points to 501
+    ++cp; // Moves by sizeof(char) = 1 byte -> points to 502
+    /*
+    cp = 502      [0x...]
+    */
+    
+    // *cp reads exactly 1 byte at 502, which evaluates to 0x34.
+    printf("%x\n", *cp); 
+    
+    // --- Tracing Short Pointer (2 Bytes Capability) ---
+    // A short pointer has a capability of 2 bytes. 
+    short *sp = (short*)&l;
+    /*
+    sp = 500      [0x...]
+    */
+    
+    // A SINGLE ++sp forces the compiler to add 2 bytes to the address,
+    // landing instantly on 502.
+    ++sp; 
+    /*
+    sp = 502      [0x...]
+    */
+    
+    // *sp reads 2 full bytes starting at 502 (reads 502 & 503).
+    // 502 holds 34, 503 holds 12. Combined in Little Endian: 1234.
+    printf("%x\n", *sp); 
+}
+```
+
+---
+
+### Little Endian vs. Big Endian
+
+Memory is divided into addresses, and data is divided into orders (bits `0-7` are the lower order byte, bits `8-15` are the higher order byte). Based on how processors map these orders to memory addresses, there are strictly two types of architectures:
+
+1.  **Little Endian (e.g., Intel Architecture):**
+    *   The **Lower Order** data is stored in the **Lower Address**.
+    *   The **Higher Order** data is stored in the **Higher Address**.
+    *   *Usage Note:* Recommended for applications where write operations dominate.
+
+2.  **Big Endian (e.g., Motorola Microcontrollers):**
+    *   The **Lower Order** data is stored in the **Higher Address**.
+    *   The **Higher Order** data is stored in the **Lower Address**.
+    *   *Usage Note:* Recommended for applications where read operations dominate.
+
+**Conceptual Diagram: Storing the Integer `1` (16-bit)**
+
+Integer `1` in binary is `0000 0000` (Higher Order) and `0000 0001` (Lower Order).
+
+```text
+Little Endian (Intel)               Big Endian (Motorola)
++-------------------------+         +-------------------------+
+| Addr 501: 0000 0000 (0) |         | Addr 501: 0000 0001 (1) |
+| Addr 500: 0000 0001 (1) |         | Addr 500: 0000 0000 (0) |
++-------------------------+         +-------------------------+
+```
+
+---
+
+### Cross-Architecture Communication
+
+A massive challenge in systems programming occurs when a PC (Intel / Little Endian) tries to communicate with a Microcontroller (Motorola / Big Endian). 
+
+If the PC sends the hex value `0xFA35`, Little Endian stores `35` at the lower address and `FA` at the higher address. If the Big Endian microcontroller reads this memory block directly, it expects the higher order data at the lower address, causing it to misinterpret the data completely.
+
+*   **The Solution:** To communicate safely between architectures, programmers must strictly **swap the bytes** (using bitwise operators) before transmitting the data.
+
+---
+
+### Interview Question: Detect Endianness
+
+A very famous interview question asks: *"Write a C program to check whether the underlying hardware architecture is Little Endian or Big Endian."*
+
+**The Strategy:**
+
+1. Create an integer with the value `1`. 
+2. Point a character pointer (`char*`) to it. 
+3. Because a character pointer strictly reads the lowest memory address (`0x500`), we can check its value. If it sees `1`, the architecture stored the lower order byte first (Little Endian). If it sees `0`, it stored the higher order byte first (Big Endian).
+
+**Concept Code: Endianness Detection Program**
+
+```c
+void main() {
+    int a = 1;
+    char *cp = (char*)&a;
+    /*
+    a  = 1   [0x500] 
+    cp = 500 [0x...]
+    */
+    
+    // '*cp' strictly reads the value at the lowest address (500)
+    if (*cp == 1) {
+        printf("Architecture is Little Endian\n");
+    } else {
+        printf("Architecture is Big Endian\n");
+    }
+}
+```
+
+---
+
+## Void Pointer
+
+A void pointer (`void *`) is a generic pointer capable of pointing to any data type. However, because it lacks a specific type, the compiler does not know its byte size, imposing strict limitations on its use.
+
+### Indirection and Arithmetic Rules
+
+You **cannot** directly apply the indirection operator (`*`) or arithmetic operators (`++`, `--`, `+`, `-`) to a void pointer. Because the compiler does not know how many bytes to extract or jump, it will throw an error. 
+
+**Solution:** You must strictly **typecast** the void pointer to a specific data type before dereferencing or performing math.
+
+```c
+void void_rules() {
+    int a = 10;
+    void *vp = &a; 
+    /*
+    a  = 10  [0x500]
+    vp = 500 [0x...]
+    */
+    
+    // printf("%d", *vp); // ERROR: Invalid Indirection.
+    // ++vp;              // ERROR: Size unknown. Cannot increment.
+    
+    // CORRECT APPROACH: Typecast to tell the compiler the size.
+    printf("%d", *(int*)vp);  // Safely extracts 2 bytes -> 10
+    
+    char *cp = (char*)vp + 1; // Safely adds 1 byte -> points to 501
+}
+```
+
+### Reusability Advantage
+
+The primary benefit of a void pointer is flexibility. A single void pointer can dynamically hold an integer address, and later be reassigned to a float address in the same program.
+
+```c
+void void_reusability() {
+    int a = 10;
+    float f = 3.14;
+    void *vp; 
+    
+    vp = &a;
+    /* a = 10 [0x500], vp = 500 [0x...] */
+    printf("%d\n", *(int*)vp); 
+    
+    vp = &f;
+    /* f = 3.14 [0x600], vp = 600 [0x...] */
+    printf("%f\n", *(float*)vp); 
+}
+```
+
+### Sizeof Rules and Void Variables
+
+While `void` implies an unknown size, a void pointer itself is just storing a memory address, meaning it has a fixed size (e.g., 2 bytes on a 16-bit compiler). However, you cannot create a non-pointer `void` variable because the compiler cannot allocate memory for an unknown size.
+
+```c
+void void_sizeof_rules() {
+    void *vp;
+    
+    // Valid: Address sizes are known (2 Bytes)
+    int s1 = sizeof(vp);        
+    int s2 = sizeof((char*)vp); 
+    
+    // Invalid: Cannot dereference void
+    // sizeof(*vp);             
+    
+    // Valid: Typecasted dereference (Reads 1 Byte)
+    int s3 = sizeof(*(char*)vp);
+    
+    // Invalid: Cannot create generic variable
+    // void v;                  
+    // sizeof(void);            
+}
+```
+
+### Summary
+
+*   **Generic Nature:** A `void *` can securely point to `int`, `float`, `char`, etc.
+*   **Strict Rules:** Operators `*`, `++`, `--`, `+`, `-` are strictly prohibited on uncast void pointers.
+*   **Typecasting:** You must cast the pointer (e.g., `(int*)vp`) before operating on it.
+*   **Variables:** `void *vp` is valid (address size is known), but `void v` is invalid (data size is unknown).
+
+***
+
 ## Wild and NULL Pointer
 ## callbyvalue and callbyreferance
 ## Dangling Pointer
