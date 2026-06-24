@@ -1,0 +1,22 @@
+toc: true
+toc-depth: 2
+number-sections: true
+standalone: true
+self-contained: true
+
+to: html5
+highlight-style: tango
+
+css:
+  - pandoc/html/c_programming.css
+
+include-after-body:
+  - pandoc/html/copy-code.js
+
+filters:
+  - filters/number-code-lines.lua
+  - filters/boxed-tables.lua
+
+metadata:
+  title: C Programming Book
+  author: Mohan Arunachalam

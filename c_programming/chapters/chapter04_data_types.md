@@ -1,10 +1,19 @@
-\newpage
-
 # Data Types
+
+In C programming, data types define the nature of the variables, dictating how much memory to allocate and how to interpret the binary sequences stored within. Understanding data types requires a deep dive into number systems, binary addition, and internal compiler architectures. This chapter covers character, integer, and floating-point data types, their specific range boundaries, the "butterfly" wrap-around behaviors, type promotion rules, and the powerful `sizeof` operator.
+
+*   [Number System](#number-system)
+*   [Intro To Data Types](#intro-to-data-types)
+*   [Signed char Data Type](#signed-char-data-type)
+*   [Unsigned char Data Type](#unsigned-char-data-type)
+*   [Short int Data Type](#short-int-data-type)
+*   [Long int Data Type](#long-int-data-type)
+*   [Floating-point Datatypes](#floating-point-datatypes)
+*   [Sizeof Operator](#sizeof-operator)
 
 ## Number System
 
----
+C programming inherently deals with four popular number systems: Decimal (Base 10), Octal (Base 8), Hexadecimal (Base 16), and Binary (Base 2). While the compiler strictly processes binary, programmers use different formats to feed data efficiently. 
 
 ### Types of Number Systems
 
@@ -20,6 +29,7 @@ There are many number systems, but four are highly popular and essential in prog
 ---
 
 ### Binary Terminology and Storage Units
+
 *   **Bits:** The values `0` and `1` are called *binary digits*. If you take "b" from binary and "it" from digits, you get the short form **bits**.
 *   **Nibble:** 4 bits are considered 1 nibble.
 *   **Byte:** 8 bits are considered 1 byte (derived from the words "**bi**nary **te**rm").

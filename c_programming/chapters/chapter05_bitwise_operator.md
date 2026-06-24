@@ -1,5 +1,3 @@
-\newpage
-
 # Bitwise Operators
 
 | **Operator** | **Name**                           | **Description**                            |

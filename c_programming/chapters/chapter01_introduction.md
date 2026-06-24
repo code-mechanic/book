@@ -1,5 +1,6 @@
-\newpage
-# Introduction to C
+# Foundations of C: Syntax, Data Types, and Operators
+
+Learning C programming is similar to learning English. In English, we use Alphabets to form Words, Words to form Sentences, and Grammar to construct meaning. In C, we use Keywords (32 alphabets), Operators (45 words), Separators, and Syntax (the grammar) to write programs. This chapter introduces the foundational building blocks of C, including basic data types, input/output formatting, mathematical operations, and the strict rules for defining variables and logic.
 
 - Comparision between English language and C programming language
 
@@ -10,7 +11,27 @@
 | 3. Sentance (`Grammer makes this`) | 3. Separators (`14`) |
 |                                    | 4. Constants         |
 
-- Constants
+
+*   [Introduction to C and Constants](#introduction-to-c-and-constants)
+*   [The Assignment Operator](#the-assignment-operator)
+*   [Arithmetic Operators](#arithmetic-operators)
+*   [C-Tokens and printf Function](#c-tokens-and-printf-function)
+*   [Variable Declaration Rules](#variable-declaration-rules)
+*   [Relational and Logical Operators](#relational-and-logical-operators)
+
+***
+
+## Introduction to C and Constants
+
+A C program is built using basic tokens and strict Syntax (grammar). Violating the syntax results in a compilation error. At the core of data are Constants—fixed values that do not change during program execution.
+
+### Types of Constants
+
+Dennis Ritchie (the creator of C) classified constants into three primary data types:
+
+*   **Integer (`int`):** Any positive number, negative number, or zero without a decimal point (e.g., `5`, `-5`, `0`).
+*   **Real (`float`):** Any number containing a decimal point (e.g., `5.25`). It is called "float" because the decimal point can "float" or change positions depending on the number's precision.
+*   **Character (`char`):** Any single character strictly enclosed in single quotes. The length inside the quotes must be exactly one (e.g., `'a'` is valid, `'ab'` is invalid).
 
 | **Item** | **value**                       | **C datatype** |
 |----------|---------------------------------|----------------|
@@ -18,105 +39,128 @@
 | real     | `5.12`, `0.39`, `5.00`, `-3.25` | float          |
 | charater | `'a'`, `'5'`                    | char           |
 
-- Reason for the name float but why not real?
-    - 100.`231452156`
-        - `.` is decimal point
-        - `231452156`: This keep on changing So `float`
-
 - Primary / Primitive / Fundamental / Basic data types in C
     - `Data` is a meaningfull information
     - `Datatype` is a different kind of data like `int`, `float` and `Char`
 
-| **Format Specifier** | **Data Type**          | **Description**                                                 |
-|----------------------|------------------------|-----------------------------------------------------------------|
-| %c                   | char                   | Prints a single character                                       |
-| %s                   | char *                 | Prints a string                                                 |
-| %d                   | int                    | Signed decimal integer                                          |
-| %i                   | int                    | Signed integer (same as `%d` in `printf`)                       |
-| %u                   | unsigned int           | Unsigned decimal integer                                        |
-| %hd                  | short int              | Signed short integer                                            |
-| %hu                  | unsigned short int     | Unsigned short integer                                          |
-| %ld                  | long int               | Signed long integer                                             |
-| %lu                  | unsigned long int      | Unsigned long integer                                           |
-| %lld                 | long long int          | Signed long long integer                                        |
-| %llu                 | unsigned long long int | Unsigned long long integer                                      |
-| %f                   | float                  | Floating-point number (`printf` promotes float to double)       |
-| %lf                  | double                 | Double-precision floating-point (`scanf` uses `%lf` for double) |
-| %Lf                  | long double            | Long double floating-point                                      |
-| %e / %E              | float, double          | Scientific notation                                             |
-| %g / %G              | float, double          | Shortest representation of `%f` or `%e`                         |
-| %x                   | unsigned int           | Hexadecimal integer (lowercase)                                 |
-| %X                   | unsigned int           | Hexadecimal integer (uppercase)                                 |
-| %o                   | unsigned int           | Octal integer                                                   |
-| %p                   | void *                 | Pointer address                                                 |
-| %%                   | —                      | Prints `%` character                                            |
-| %zu                  | size_t                 | Unsigned size type                                              |
-| %td                  | ptrdiff_t              | Pointer difference type                                         |
-| %jd                  | intmax_t               | Largest signed integer type                                     |
-| %ju                  | uintmax_t              | Largest unsigned integer type                                   |
+### Comprehensive Format Specifiers
 
----
+To represent and print these data types, C uses format specifiers. Below is a comprehensive reference table of available specifiers:
+
+| **Specifier** | **Data Type**            | **Description**                                |
+| ------------- | ------------------------ | ---------------------------------------------- |
+| `%c`          | `char`                   | Prints a single character                      |
+| `%s`          | `char *`                 | Prints a string                                |
+| `%d` / `%i`   | `int`                    | Signed decimal integer                         |
+| `%u`          | `unsigned int`           | Unsigned decimal integer                       |
+| `%hd`         | `short int`              | Signed short integer                           |
+| `%ld`         | `long int`               | Signed long integer                            |
+| `%lld`        | `long long int`          | Signed long long integer                       |
+| `%f`          | `float`                  | Floating-point number                          |
+| `%lf`         | `double`                 | Double-precision floating-point                |
+| `%x` / `%X`   | `unsigned int`           | Hexadecimal integer (lowercase / uppercase)    |
+| `%o`          | `unsigned int`           | Octal integer                                  |
+| `%p`          | `void *`                 | Pointer address                                |
+
+```c
+#include <stdio.h>
+
+int main() {
+    int age = 25;
+    float price = 10.50;
+    char grade = 'A';
+    
+    // Printing values using matching format specifiers
+    printf("Age: %d\n", age);
+    printf("Price: %f\n", price);
+    printf("Grade: %c\n", grade);
+    
+    return 0;
+}
+```
+
+**Key Summary: Intro to C and Constants**
+
+*   **Syntax** is the grammar of C. Violating it causes compilation errors.
+*   Constants are divided into `int` (whole numbers), `float` (decimals), and `char` (single quotes of length one).
+*   Format specifiers act as placeholders to map variables to output strings.
+
+***
 
 ## List of all Operators
 
 ![Operators](c_programming/diagrams/chapter1_introduction/operator_table.png){ width=75% }
 
----
+## The Assignment Operator
 
-## Assignment Operator
+The assignment operator (`=`) is used to assign a value to a variable, but it enforces highly strict rules regarding what can be placed on its left side versus its right side.
 
-- It requires 2 arguments
-- Left side arg must be variable
-- Right side arg can be a variable / constant / expression
-- Left side value is called l-value
+### The L-Value Rule
 
-```C
-// Not valid
-a = 5
-a = ;
-  = 10;
-10 = 20;
+The assignment operator strictly requires exactly **two arguments**. 
 
-// Valid
-a = 5;
-b = a;
-c = 2 + 3;
+*   **Right Side:** Can be a variable, a constant, or an expression (e.g., `5`, `A`, `2 + 3`).
+*   **Left Side (L-Value):** Must strictly be a **variable** capable of storing data. If you place a constant or an expression on the left side, the compiler throws an **L-value required error**.
+
+### Statement Terminators
+
+In English, a sentence ends with a full stop. In C, every single statement must end with a semicolon (`;`). We do not use a dot (`.`) because the dot is reserved for floating-point numbers.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a, b, c;
+    
+    a = 5;      // Valid: Assigning a constant to a variable
+    b = a;      // Valid: Assigning a variable to a variable
+    c = 2 + 3;  // Valid: Assigning an expression to a variable
+    
+    // INVALID EXAMPLES (Uncommenting causes compilation errors):
+    // 10 = a;      // ERROR: L-value required (Left is constant)
+    // a + b = 10;  // ERROR: L-value required (Left is expression)
+    // a = 5        // ERROR: Statement missing semicolon
+    //   = 5;       // ERROR: Assignment operator need two arguments
+    
+    printf("%d %d %d\n", a, b, c);
+    return 0;
+}
 ```
 
-- Every expression is replaced with constant
+Every expression is replaced with constant
 
 ```C
-a = 5;
-b = -3;
-c = 9;
+int main() {
+    int a = 5;
+    int b = -3;
+    int c = 9;
 
-a = b;  // a = -3
-b = -c; // b = -9
-a = -b; // a = 9
+    a = b;  // a = -3
+    b = -c; // b = -9
+    a = -b; // a = 9
 
--c = a; // Error because l-value is expresion not a variable
+    -c = a; // Error because l-value is expresion not a variable
+}
 ```
 
-- In C language each and every statement ends with `;`
-- Semicolon is called statement terminator (or) end of statement
-- Why `.` is not used as terminator?
-    - because `.` is used as decimal point in float number
-- What is l-value error?
-    - On the left hand side of assignment operation we should provide a variable but by mistake if we provide constant (or) expression then we get l-value required error.
+**Key Summary: Assignment Operator**
 
----
+*   The assignment operator (`=`) requires two arguments and copies data from right to left.
+*   The left side must always be a variable memory location (L-value).
+*   Missing a semicolon throws a "Statement missing semicolon" error.
+
+***
 
 ## Arithmetic Operators
 
-```C
-// Example 1: Expression evaluation
-a = 2 + 3;
-a = 2 + 3 + 4;
-a = 6 - 2 + 3 - 4 + 1;
-a = 2 + 3 * 5;
-a = (2 + 3) * 5;
-a = 2 * 3 + 3 * 2;
-```
+C supports standard arithmetic operators (`+`, `-`, `*`, `/`) and introduces a special operator for remainders (`%`). When evaluating complex expressions, C follows strict priority rules and type conversion behaviors.
+
+### Priority and Type Rules
+
+*   **Priority:** Multiplication (`*`), Division (`/`), and Modulus (`%`) share the highest priority. Addition (`+`) and Subtraction (`-`) share lower priority. The Assignment operator (`=`) has the lowest priority. Evaluation happens from **left to right** if priority is tied.
+*   **Type Casting Rule:** 
+    *   `int` operated with `int` always results in an `int` (e.g., `5 / 2 = 2`).
+    *   If **any** argument is a `float`, the result becomes a `float` (e.g., `5.0 / 2 = 2.5`).
 
 | **Operation on** | **Result** |
 |------------------|------------|
@@ -125,47 +169,72 @@ a = 2 * 3 + 3 * 2;
 | float with int   | float      |
 | float with float | float      |
 
-```C
-// Example 2:
-a = 5 / 2;   // 2
-a = -5 / 2;  // -2
-a = 5 / -2   // -2
-a = -5 / -2  // -2
+### The Modulus Operator
 
-a = 5.0 / 2; // 2.5
-a = 5 / 2.0; // 2.5
-a = -5 / 2.0 // -2.5
-a = 2 / 5    // 0
-a = 2 / -5   // 0
-```
+In math, division gives both a quotient and remainder. In C, an operator returns exactly one result. Division (`/`) strictly gives the quotient, and Modulus (`%`) strictly gives the remainder.
 
-```C
-// Example 3:
+**Modulus Strict Rules:**
 
-a = 17 / 3 / 2;
-/*
-a = 5 / 2
-a = 2
-*/
+1.  **Sign Rule:** The result sign is always strictly the **same as the numerator's sign**. It ignores the denominator's sign. (e.g., `-5 % 2 = -1`, but `5 % -2 = 1`).
+2.  **No Floats:** You **cannot** apply modulus to float values. Doing so throws an "Illegal use of floating point" error.
+3.  **Multiple Detection:** If `x % y == 0`, `x` is a multiple of `y`.
+4.  **Unit Place:** Any number `% 10` isolates the last digit (unit place).
+5.  **Smaller Numerator:** If the numerator is smaller than the denominator, the result is the numerator itself (e.g., `6 % 12 = 6`).
 
-a = 15 / 2 * 3;
-/*
-a = 7 * 3
-a = 21
-*/
+```c
+#include <stdio.h>
 
-a = 9 * / 4;
-/*
-a = 27 / 4
-a = 6
-*/
+int main() {
+    int a;
+    float f;
 
-a = 6 * 3 / 4 * 5;
-/*
-a = 18 / 4 * 5
-a = 4 * 5
-a = 20
-*/
+    a = 5 / 2;     // int / int -> int result. 'a' gets 2.
+    a = -5 / 2;    // -2
+    a = 5 / -2     // -2
+    a = -5 / -2    // -2
+
+    f = 5.0 / 2;   // float / int -> float result. 'f' gets 2.5.
+    f = 5.0 / 2;   // 2.5
+    f = 5 / 2.0;   // 2.5
+    f = -5 / 2.0   // -2.5
+    f = 2 / 5      // 0
+    f = 2 / -5     // 0
+
+    a = 17 / 3 / 2;
+    /*
+    a = 5 / 2
+    a = 2
+    */
+
+    a = 15 / 2 * 3;
+    /*
+    a = 7 * 3
+    a = 21
+    */
+
+    a = 9 * 3 / 4;
+    /*
+    a = 27 / 4
+    a = 6
+    */
+
+    a = 6 * 3 / 4 * 5;
+    /*
+    a = 18 / 4 * 5
+    a = 4 * 5
+    a = 20
+    */
+
+    // Modulus Sign Rules (Remainder)
+    int m1 = -5 % 2;  // Numerator is negative -> Result: -1
+    int m2 = 5 % -2;  // Numerator is positive -> Result: 1
+    
+    // Invalid Modulus (Causes compilation error):
+    // float err = 5.0 % 2; // ERROR: Illegal use of floating point
+    
+    printf("a: %d, f: %f, m1: %d, m2: %d\n", a, f, m1, m2);
+    return 0;
+}
 ```
 
 | **Division** | **Result of division** | **Modulus** | **Result of modulus** |
@@ -175,353 +244,288 @@ a = 20
 | - / +        | -                      | - % +       | -                     |
 | - / -        | +                      | - % -       | -                     |
 
-- **Floating point numbers cannot used in modulus only integer is accecptable**
+**Key Summary: Arithmetic Operators**
 
-```C
-// Example 1
+*   Integer division truncates decimals (`5 / 2` is `2`, not `2.5`).
+*   Modulus strictly calculates remainders, and its sign depends entirely on the numerator.
+*   Modulus can never be used with floating-point numbers.
 
-a = 5 / -2; // -2
-a = 5 % -2; // 1
-```
+***
 
-```C
-// Example 2
+## C-Tokens and printf Function
 
-a = 3.5 * 2 % 7; // Compilation error
-```
+A C-Token is the smallest individual unit in a program. To output these tokens and variables visually to the user, we rely heavily on the built-in `printf` function.
 
-- The result of modulus operation is remainder
-- Result sign is same as numerator sign
-    - If numerator is +ve then result is +ve
-- Result sign does not depend on denominator
-- `Condition 1`: x % y == 0 means then we can say that `x` is multiple of `y`
-- `Condition 2`: Numerator % 10 givers last digit of numerator
-- `Condition 3`: When numerator is smaller then denominator then result is numerator
-- `Condition 4`: When numerator is equal to denominator then result is zero
+### C-Tokens and Indentation
 
----
+The five C-Tokens are Keywords, Operators, Separators, Constants, and Identifiers. You can place any number of spaces, tabs, or newlines between tokens. However, programmers must use **good indentation** (clean alignment of brackets and spacing) to ensure the code is human-readable and maintainable.
 
-## C-Tokens
+### The printf Rules
 
-- Smallest individual unit in C language is called C-Token
-- C-Token are
-    - Keywords
-    - Operators
-    - Separators
-    - Constants
-    - Identifiers
-- There can be 'N' no. of space / Tabs / Newlines between two C-Tokens
-- Program should be in good indentation
+1.  `printf` strictly prints the **first argument** on the screen.
+2.  The first argument must always be enclosed in double quotes `" "`.
+3.  If the first argument contains a format specifier (like `%d`), `printf` sequentially matches it to the next arguments provided after commas.
+4.  If a format specifier lacks a matching argument, or data types mismatch, the result is an unpredictable **garbage value**.
 
-```C
-void main()
-{
-    printf("Hello");
+```c
+#include <stdio.h>
+
+int main() {
+    // Prints first argument exactly as written
+    printf("Hello World\n"); 
+    
+    // First %d matches 10, second %d matches 20
+    printf("Values: %d and %d\n", 10, 20); 
+    
+    // Operator inside quotes vs outside quotes
+    printf("3 + 2 = %d\n", 3 + 2); // Prints: 3 + 2 = 5
+    
+    // Expects two integers, but only one is provided
+    // Output: Missing args: 10 and <random_garbage_value>
+    printf("Missing args: %d and %d\n", 10); 
+
+    printf("    Hello    ");
+    // ....Hello....
+    // (Spaces are retained)
+
+    printf("Hello%dadc%d", 10, 20);
+    // Hello10abc20
+
+    printf("%d %d %d", 10, 20, 30);
+    // 10 20 30
+
+    printf("%d%d%d", 10, 20, 30);
+    // 102030
+
+    printf("%d,%d,%d", 10, 20, 30);
+    // 10,20,30
+
+    printf("%d %d %d", 10, 20);
+    // 10 20 <GV/Junk>
+
+    printf("%d %d %d", 10);
+    // 10 GV GV
+
+    printf("%d %d %d");
+    // GV GV GV
+
+    printf("%d %d %d", 10, 20, 30, 40);
+    // 10 20 30
+
+    printf("%d %f %c", 10, 3.75, 'a');
+    // 10 3.75 a
+
+    printf("%d", 5.5);
+    // GV
+
+    printf("%f", 5);
+    // GV
+
+    printf("%d", 5 + 2);
+    // 7
+
+    printf("5 + 2");
+    // 5 + 2
+
+    printf("%d + %d", 5 + 2);
+    // 7 + GV
+
+    printf("%d * %d = %d", 5, 2, 5+2);
+    // 5 * 2 = 7
+
+    printf("%d * %d = %d", 5, 2, 5*2);
+    // 5 * 2 = 10
+
+    printf("%f", 5/2);
+    // GV
+
+    printf("%d", 5/2);
+    // 2
+
+    printf("%f", 5.0 % 2);
+    // Error
+
+    printf("%d", -5 % -2);
+    // -1
+
+    printf("Hello", "Hai", "Bye");
+    // Hello
+
+    printf("Hello""Hai""Bye");
+    // HelloHaiBye
+
+    printf(""Hello"");
+    // Error
+
+    printf("""Hello""");
+    // Hello
+
+    printf(""""Hello"""");
+    //Error
+
+    printf("%d %d %d", "%d %d", 10, 20, 30, 40, 50);
+    // GV 10 20
+
+    printf("10, 20", "%d");
+    // 10, 20
+
+    int ts = 7500;
+    printf("ts");                 // ts
+    printf(ts);                   // Error
+    printf("Total sal = %d", ts); // Total sal = 7500
+    printf("%d + 1000", ts);      // 7500 + 1000
+    printf("%d", ts + 1000);      // 8500
+
+    return 0;
 }
 ```
 
-- The above program has following C-Tokens
-    - Keyword     : `void`
-    - Operator    : `(` `)` `(` `)`
-    - Separator   : `{` `;` `}`
-    - Constant    : `"Hello"`
-    - Identifiers : `main` `printf`
-- Total `11` C-Tokens are there in above program
+**Key Summary: Tokens and printf**
 
----
+*   Tokens are the smallest code units. Space between them is ignored.
+*   `printf` only prints the first argument (inside the double quotes).
+*   Mismatched or missing arguments in `printf` yield unpredictable garbage values.
 
-## printf function
+***
 
-- It will print 1st arg on screen
-- 1st arg must be in pair of double quotes
-- if more than one arg, then evey arg must be separated by commas
+## Variable Declaration Rules
 
-```C
-printf("Hello");
-// Hello
+Before you can use a variable, you must introduce it to the compiler. C language enforces highly specific rules regarding how variables can be named, defined, and assigned initial values.
 
-printf("    Hello    ");
-// ....Hello....
-// (Spaces are retained)
+### Definition vs Declaration
 
-printf("Hello%dadc%d", 10, 20);
-// Hello10abc20
+It is critically important to understand the compiler's behavior when introducing variables:
 
-printf("%d %d %d", 10, 20, 30);
-// 10 20 30
-
-printf("%d%d%d", 10, 20, 30);
-// 102030
-
-printf("%d,%d,%d", 10, 20, 30);
-// 10,20,30
-
-printf("%d %d %d", 10, 20);
-// 10 20 <GV/Junk>
-
-printf("%d %d %d", 10);
-// 10 GV GV
-
-printf("%d %d %d");
-// GV GV GV
-
-printf("%d %d %d", 10, 20, 30, 40);
-// 10 20 30
-
-printf("%d %f %c", 10, 3.75, 'a');
-// 10 3.75 a
-
-printf("%d", 5.5);
-// GV
-
-printf("%f", 5);
-// GV
-
-printf("%d", 5 + 2);
-// 7
-
-printf("5 + 2");
-// 5 + 2
-
-printf("%d + %d", 5 + 2);
-// 7 + GV
-
-printf("%d * %d = %d", 5, 2, 5+2);
-// 5 * 2 = 7
-
-printf("%d * %d = %d", 5, 2, 5*2);
-// 5 * 2 = 10
-
-printf("%f", 5/2);
-// GV
-
-printf("%d", 5/2);
-// 2
-
-printf("%f", 5.0 % 2);
-// Error
-
-printf("%d", -5 % -2);
-// -1
-
-printf("Hello", "Hai", "Bye");
-// Hello
-
-printf("Hello""Hai""Bye");
-// HelloHaiBye
-
-printf(""Hello"");
-// Error
-
-printf("""Hello""");
-// Hello
-
-printf(""""Hello"""");
-//Error
-
-printf("%d %d %d", "%d %d", 10, 20, 30, 40, 50);
-// GV 10 20
-
-printf("10, 20", "%d");
-// 10, 20
-
-int ts = 7500;
-printf("ts");                 // ts
-printf(ts);                   // Error
-printf("Total sal = %d", ts); // Total sal = 7500
-printf("%d + 1000", ts);      // 7500 + 1000
-printf("%d", ts + 1000);      // 8500
-```
-
----
-
-## Variable definition Rules
-
-- Variable definition ways,
-
-```C
-// Method 1:
-int a;
-int b;
-int c;
-
-// Method 2:
-int a, b, c;
-```
-
-- In the above two style 1st style is recommanded because,
-    - Subsequent change in variable type in future is easy
-    - Writing and updating a comment is easy
-
-- ***Variable definition***: Compier allocates memory for that variable
+*   **Variable Definition:** The compiler actively **allocates memory** for the variable (e.g., `int a;`). 
 
 ```C
 int a;
 int b = 10;
 ```
 
-- ***Variable declaration***: Compier doesn't allocates memory for that variable
+*   **Variable Declaration:** The compiler is simply informed about the variable's existence and type, but it **does not allocate memory** for it yet.
 
 ```C
 extern int a;
 ```
 
-Exmaples:
+### Variable Naming Rules (Identifiers)
 
-```C
-void main()
-{
-    int a; // Always say datatype to a variable
-    a = 5;
-    printf("%d", a);
-}
+Variables must follow strict identifier rules:
 
-// Output
-// 5
+1.  Must start with an alphabet (`a-z`, `A-Z`) or an underscore (`_`).
+2.  Can contain numbers, but only after the first character.
+3.  **No spaces allowed.**
+4.  **No keywords allowed.** You cannot name a variable `int` or `float`. (However, keywords can be part of a larger name, e.g., `int_value` is valid).
+5.  **No operators allowed.**
+6.  Two variables in the same scope cannot have the exact same name (causes a "Multiple declaration" error).
+7.  Length should ideally be under 15 characters to preserve readability.
 
-void main()
-{
-    int i;
-    float f;
-    i = 5;
-    f = 5.5;
-    printf("%d %f", i, f);
-}
+### Initialization vs Assignment
 
-// Output
-// 5 5.5
-```
+*   **Initialization:** Giving a variable a value strictly at the exact time it is defined (e.g., `int a = 5;`).
+*   **Assignment:** Giving a variable a value later in the code. If not initialized, a variable temporarily holds a garbage value.
 
-- In C programming we can assign any type of data to any type of variable. Internally in computer the compiler will take care.
-- In printf function only sutiable data is given to format specifier else garbage value is printed.
+```c
+#include <stdio.h>
 
-```C
-void main()
-{
-    int i;
-    i = 5.5;
-    printf("%d", i); // 5
-}
+int main() {
+    // GOOD CONVENTION: Separate lines for easy commenting
+    int count = 5;       // Initialization
+    float salary = 10.5; // Initialization
+    
+    // VALID NAMES
+    int a1 = 10;
+    int _total = 50;
+    int int_count = 5;   // 'int' is part of a larger word
+    
+    // INVALID NAMES (Uncommenting causes errors)
+    // int 1a = 5;       // ERROR: Cannot start with a number
+    // int total count;  // ERROR: Spaces are not allowed
+    // int float = 10;   // ERROR: 'float' is a reserved keyword
+    // int a+b = 5;      // ERROR: Operators not allowed
+    
+    printf("Count: %d, Salary: %f\n", count, salary);
 
-void main()
-{
-    float f;
-    f = 5;
-    printf("%f", f); // 5.0
-}
-
-void main()
-{
-    int i;
-    i = 5 / 2;
-    printf("%d", i); // 2
-}
-
-void main()
-{
-    float f;
-    f = 5 / 2;
-    printf("%f", f); // 2.0
-}
-
-void main()
-{
-    int i;
-    i = 5.0 / 2;
-    printf("%d", i); // 2
-}
-
-void main()
-{
-    float f;
-    f = 5.0 / 2;
-    printf("%f", f); // 2.5
-}
-```
-
-- More examples
-
-```C
 /*************************** Valid definition *********************************/
 
-int a;
-a = 5; // Assignment
+    int a;
+    a = 5; // Assignment
 
-int a = 5; // Initialization
+    int a = 5; // Initialization
 
-int a = 18 / 3 / 5;
+    int a = 18 / 3 / 5;
 
-int a = 2 + 5;
+    int a = 2 + 5;
 
-int a = 7.65;
+    int a = 7.65;
 
-int a, b, c;
-a = b = c = 10; // Valid
+    int a, b, c;
+    a = b = c = 10; // Valid
 
-int a, b, c = a = b = 10;
+    int a, b, c = a = b = 10;
 
-int a = a;
+    int a = a;
 
-int a1, b1, c1;
+    int a1, b1, c1;
 
-int avgofsallary; // Valid but not readable
+    int avgofsallary; // Valid but not readable
 
-int avg_of_salary;
+    int avg_of_salary;
 
-int a, A;
+    int a, A;
 
-char way2ms;
+    char way2ms;
 
-char INT;
+    char INT;
 
-int abcdefghijklmnopqrst;
+    int abcdefghijklmnopqrst;
 
-int _;
+    int _;
 
-char _1, _2;
+    char _1, _2;
 
 /******************************* Not a valid **********************************/
-int a = b = c = 10;
+    int a = b = c = 10;
 
-int 1a, 1b, 1c;
+    int 1a, 1b, 1c;
 
-int avg of salary; // Not a valid. No white space allowed
+    int avg of salary; // Not a valid. No white space allowed
 
-int if;
+    int if;
 
-int a + b;
+    int a + b;
 
-int a, a; // Not a valid. same name not allowed
+    int a, a; // Not a valid. same name not allowed
 
-float 1606y2;
+    float 1606y2;
 
-int 42shared;
+    int 42shared;
 
-char `a`, `b`, `c`;
+    char `a`, `b`, `c`;
+
+    return 0;
+}
 ```
 
-- Rules for naming a valid variable Names:
-    - An Identifier can contain
-        - a - z
-        - A - Z
-        - 0 - 9
-        - _ (underscore)
-    - An Identifier name start with alphabet (or) underscore
-    - No whitespace, operator are allowed
-    - No keyword, but act as a pert of variable
-        - Example: `int intfloat`
-    - No restriction in length of variable name, but if length is very big then readability is less. Hence programmers recommandation is max of 15 characters
+**Key Summary: Declaration Rules**
 
-```C
-int pwm_analog_read;
-int pwm_analog_write;
-int pwm_digital_read;
-int pwm_digital_write;
-```
+*   Names must begin with a letter or underscore, and cannot contain spaces, operators, or exact reserved keywords.
+*   Definition allocates memory; declaration simply informs the compiler.
+*   Defining variables on separate lines improves maintainability.
 
----
+***
 
-## Relational Operators
+## Relational and Logical Operators
+
+Relational operators are used to establish conditions and compare values. However, directly chaining mathematical comparisons (like `a > b > c`) fails in C. To combine multiple conditions safely, we must use Logical operators.
+
+### Relational Operators and Boolean Logic
+
+C has six relational operators: `>`, `<`, `>=`, `<=`, `==` (equality), and `!=` (not equal). 
+
+*   Unlike other languages, **C does not have a boolean data type**. 
+*   Therefore, a true condition strictly returns `1`, and a false condition strictly returns `0`.
 
 | **Operator** | **Name**                 | **Description**                                                       |
 |--------------|--------------------------|-----------------------------------------------------------------------|
@@ -532,67 +536,17 @@ int pwm_digital_write;
 | `>=`         | Greater than or equal to | Checks whether left operand is greater than or equal to right operand |
 | `<=`         | Less than or equal to    | Checks whether left operand is less than or equal to right operand    |
 
-```C
-a = 5 + 2;   // a is int
+**The Chaining Error:** 
 
-b = 1.5 * 3; // b is float
+If you evaluate `4 > 3 > 2`, C processes it left-to-right. First, `4 > 3` evaluates to True (`1`). Then, the code evaluates `1 > 2`, which is False (`0`). The mathematical intent fails because of strict boolean conversion.
 
-c = 4 > 3;   // c and d is boolean (but not available in C)
-d = 9 < 7;
-```
+### Logical Operators
 
-- The use of this operator
-    - To establish relation between two numbers and perform comparition
-    - Result of relation operation is either `true` or `false`
-    - `true` and `false` are boolean datatype but C does not support that hence
-        - `true`  = Non-zero
-        - `false` = zero
+To solve chaining, we combine isolated relational statements using Logical operators (`&&`, `||`, `!`).
 
-```C
-void main()
-{
-    int a;
-    a = 4 > 3 > 2;
-    printf("%d", a); // 0
-}
-```
-
-- In Maths,
-    - a > b and b > C makes a > c. So a > b > c
-    - 4 > 3 and 3 > 2. So 4 > 3 > 2
-- In English, Lets take below two scentance
-    - I am watching movie
-    - I am eating popcorn
-    - Now, Lets combine two statement blindly
-        - I am watching movie eating popcorn `(meaning less)`
-    - So, I am watching movie `and` eating popcorn `(meaningful now)`
-- In C Language
-    - `4 > 3 > 2` makes result in `0` even if we think in matematically and gramatically
-    - So, `(4 > 3) && (3 > 2)` makes result `1`
-
-```C
-a = 4 + 3 > 2 + 5;
-  = 7 > 2 + 5
-  = 7 > 7
-  = 0
-
-a = 6 > 3 + 2 < 8
-  = 6 > 5 < 8
-  = 1 < 8
-  = 1
-
-a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
-// Based on the Associativity of operator all are executed from left to right
-// and last operator is !=. So result always will be 1 or 0
-```
-
----
-
-## Logical Operator
-
-- If we are combining 2 or more relation operator directly then result is unexpected
-- To overcome this C people have introduced logical operators
-- Thus use of logical operation is to combine two (or) more relational statement and to get compound statement
+*   **Logical AND (`&&`):** Returns `1` if *all* conditions are non-zero. If even one is zero, it returns `0`.
+*   **Logical OR (`||`):** Returns `1` if *at least one* condition is non-zero.
+*   **Logical NOT (`!`):** Reverses the truth value. `!0` becomes `1`. `!1` becomes `0`. It is heavily used for checking negative test conditions (e.g., checking if memory was *not* allocated).
 
 | **Operator** | **Name**    | **Description**                                |
 |--------------|-------------|------------------------------------------------|
@@ -611,13 +565,53 @@ a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
 > - When there are 'N' condition and if we are depend on any 1 condition that time we gone for `OR` logic
 > - `NOT` is used in negative test condition
 
----
+### Short-Circuit Evaluation and Operand Execution
 
-### Short circuit operation
+In C language, there is a strict order of precedence for *operators*, but generally, there is no strict order of execution for *operands* (e.g., in `a = 2 + 3;`, the compiler does not guarantee if 2 or 3 is fetched first).
 
-- In logical AND, if 1st arg is `0` then compiler will not execute 2nd and rest of args and result is zero.
-- In logical OR, if firat arg is non zero then compiler will not execute 2nd and rest of args and result is one.
-- In logical AND and logical OR, if we are able to decide the result based on 1st arg then we are bypassing the rest of args.
+**The Exceptions (Left-to-Right Execution):**
+
+There are exactly four operators where operands are strictly and compulsorily evaluated from **left to right**:
+
+1.  Logical AND (`&&`)
+2.  Logical OR (`||`)
+3.  Conditional / Ternary (`?:`)
+4.  Comma (`,`)
+
+This strict left-to-right execution allows **Short-Circuiting**:
+
+*   In **AND** (`&&`), if the first argument evaluates to `0` (false), the compiler guarantees the final result is false and entirely bypasses the second argument.
+*   In **OR** (`||`), if the first argument evaluates to `1` (true), the compiler guarantees the final result is true and entirely bypasses the second argument.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int result;
+    
+    result = (5 == 5); // Relational Truth: True, so result is 1
+    
+    // The Chaining Logical Error
+    // 4 > 3 evaluates to 1. Then 1 > 2 evaluates to 0.
+    int wrong_chain = 4 > 3 > 2; 
+    
+    // The Correct Logical AND Approach
+    // (4 > 3) is 1. (3 > 2) is 1. 1 && 1 evaluates to 1.
+    int right_chain = (4 > 3) && (3 > 2); 
+    
+    // Logical NOT: 5 is non-zero (True). !True is False (0).
+    int not_example = !5; 
+    
+    printf("Wrong: %d, Right: %d, Not: %d\n", 
+           wrong_chain, right_chain, not_example);
+
+    max = a;
+    b > max && (max = b);
+    printf("%d", max);
+
+    return 0;
+}
+```
 
 ```C
 
@@ -630,25 +624,17 @@ a = 6 * 3 >= 5 * 2 + 8 >= 17 + 8 <= 6 * 4 == 8 * 5 != 5 * 3 * 2 + 10 != 40;
 1 && arg1 => Output
 0 || arg1 => Output
 - output depends on arg1
-*/
-```
 
-**WAP to find max of 2 integer without using if**
-
-```c
-max = a;
-b > max && (max = b);
-printf("%d", max);
-```
-
-- In C language there is order of prededance for operators but there there is no order of precedance for operand except `&&`, `||`, `?:` and `,` which evaluate operand from left to right.
-- For example `a = 2 + 3;`, here addition operation is used in which we don't 3 is taken first or 2 is taken first to CPU for addition.
-- But for above mentioned operators, the operands are compulsory execute from left to right.
-
-```c
 ++x + ++y;
 // Here ++y executed first or ++x executed first? compiler depandant
 
 ++x && ++y
 // here ++x only executed first
+*/
 ```
+
+**Key Summary: Relational and Logical**
+
+*   C has no boolean type: True resolves to `1`, False resolves to `0`.
+*   Never chain relational operators directly (`a > b > c`). Use logical operators instead (`a > b && b > c`).
+*   Logical operators utilize short-circuiting to bypass unnecessary calculations entirely from left to right.

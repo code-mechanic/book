@@ -1,6 +1,19 @@
-\newpage
+# Increment and Decrement Operators
 
-# Increment & Decrement Operators
+In C programming, increment (`++`) and decrement (`--`) operators are specialized unary operators used to increase or decrease a variable's value exactly by `1`. They simulate real-world concepts like "prepaid" (pay first, use later) and "postpaid" (use first, pay later) services. Understanding the precise timing of when the value is updated versus when the expression is evaluated is one of the most critical skills for solving complex logic and placement problems.
+
+*   [Increment Operator](#increment-operator)
+*   [Decrement Operator](#decrement-operator)
+*   [Examples with Basic Concept](#examples-with-basic-concept)
+*   [Examples with Flow Control](#examples-with-flow-control)
+*   [Examples with Logical Operator](#examples-with-logical-operator)
+*   [Examples with Flow Control and Logical Operator](#examples-with-flow-control-and-logical-operator)
+
+***
+
+## Increment Operator
+
+The increment operator (`++`) internally acts as `a = a + 1`. However, placing the operator before the variable (Pre-increment) versus after the variable (Post-increment) fundamentally changes the order of execution within a statement.
 
 **Syntax**
 
@@ -12,7 +25,7 @@
 |                                |   |                                                |
 |     a++; // Post increment     |   |     /*                                         |
 |     ++a; // Pre increment      |   |     Here increment happened but not updated in |
-|                                |   |     'a'. So assignment operator  need          |
+|                                |   |     'a'. So assignment operator needed         |
 |     /*                         |   |     */                                         |
 |     Both are internally act as |   |     a + 1;                                     |
 |     a = a + 1 and replace with |   | }                                              |
@@ -23,37 +36,55 @@
 | ```                            |   |                                                |
 +--------------------------------+---+------------------------------------------------+
 
----
+### Pre-Increment (*++a*)
 
-## Increment operator
+**Rule:** Increment and Replace. 
 
-+---------------------------------+---+---------------------------------+
-| ```c                            |   | ```c                            |
-|                                 |   |                                 |
-| void main() {                   |   | void main() {                   |
-|     int a = 5;                  |   |     int a = 5;                  |
-|                                 |   |                                 |
-|     /*                          |   |     /*                          |
-|      1. Increment 'a' first.    |   |      1. Replace expression with |
-|      2. Replace expression with |   |         'a' value               |
-|         updated 'a'             |   |      2. Increment 'a' later.    |
-|     */                          |   |     */                          |
-|     int b = ++a;                |   |     int b = a++;                |
-|                                 |   |                                 |
-|     printf("%d %d", a, b);      |   |     printf("%d %d", a, b);      |
-|                                 |   |                                 |
-| // Output                       |   | // Output                       |
-| // 6 6                          |   | // 6 5                          |
-| }                               |   | }                               |
-|                                 |   |                                 |
-| ```                             |   | ```                             |
-+---------------------------------+---+---------------------------------+
+1. The compiler first increments the value of the variable.
+2. It then replaces the expression with this newly updated value.
 
-- Here both are incrementing but increment time is different.
+### Post-Increment (*a++*)
 
----
+**Rule:** Replace and Increment.
 
-## Decrement operator
+1. The compiler first replaces the expression with the variable's *current* value.
+2. It then strictly increments the variable in the background.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 5;
+    
+    /* Pre-Increment: Increment first (6), then replace. */
+    int b = ++a; 
+    
+    /* Output: a is 6, b is 6 */
+    printf("Pre-Increment: a=%d, b=%d\n", a, b);
+    
+    a = 5; // Reset
+    
+    /* Post-Increment: Replace first (5), then increment a to 6. */
+    int c = a++; 
+    
+    /* Output: a is 6, c is 5 */
+    printf("Post-Increment: a=%d, c=%d\n", a, c);
+    
+    return 0;
+}
+```
+
+**Key Summary: Increment Operator**
+
+*   `++a` (Pre-increment): Increment the variable, then use the new value.
+*   `a++` (Post-increment): Use the current value, then increment the variable.
+*   Both strictly result in the variable ultimately increasing by `1`.
+
+***
+
+## Decrement Operator
+
+The decrement operator (`--`) internally acts as `a = a - 1`. It follows the exact same "replace vs execute" rules as the increment operator depending on its placement.
 
 +---------------------------------+---+---------------------------------+
 | ```c                            |   | ```c                            |
@@ -77,7 +108,50 @@
 | ```                             |   | ```                             |
 +---------------------------------+---+---------------------------------+
 
----
+### Pre-Decrement (*--a*)
+
+**Rule:** Decrement and Replace.
+
+1. The compiler first decrements the value of the variable.
+2. It then replaces the expression with this newly updated value.
+
+### Post-Decrement (*a--*)
+
+**Rule:** Replace and Decrement.
+
+1. The compiler first replaces the expression with the variable's *current* value.
+2. It then strictly decrements the variable in the background.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 5;
+    
+    /* Pre-Decrement: Decrement first (4), then replace. */
+    int b = --a; 
+    
+    /* Output: a is 4, b is 4 */
+    printf("Pre-Decrement: a=%d, b=%d\n", a, b);
+    
+    a = 5; // Reset
+    
+    /* Post-Decrement: Replace first (5), then decrement a to 4. */
+    int c = a--; 
+    
+    /* Output: a is 4, c is 5 */
+    printf("Post-Decrement: a=%d, c=%d\n", a, c);
+    
+    return 0;
+}
+```
+
+**Key Summary: Decrement Operator**
+
+*   `--a` (Pre-decrement): Decrement the variable, then use the new value.
+*   `a--` (Post-decrement): Use the current value, then decrement the variable.
+
+***
 
 ## Examples
 
@@ -190,7 +264,7 @@ void main() {
 
 ### Examples with flow control
 
-> If we are trying to change a variable value more than once in single statement the resulr is dependant on compiler
+> If we are trying to change a variable value more than once in single statement the result is dependant on compiler
 
 ```c
 void main() {
@@ -215,11 +289,13 @@ void main() {
 ```
 
 **Turbo C compiler**
+
 1. Do all pre increment
 2. Substitute latest value everywhere
 3. Do all post increment
 
 **GCC compiler**
+
 - If pre increment then increment and replace
 - If post increment then replace and increment
 

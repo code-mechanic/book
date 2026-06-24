@@ -1,5 +1,3 @@
-\newpage
-
 # Functions
 
 ## Introduction to Functions

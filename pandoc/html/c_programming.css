@@ -1,0 +1,59 @@
+body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+.code-block-wrapper {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+  padding-top: 3rem;
+  overflow: auto;
+  border: 1px solid #d0d7de;
+  border-radius: 0.4rem;
+}
+
+.copy-code-button {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 1;
+  padding: 0.3rem 0.65rem;
+  color: #24292f;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #f6f8fa;
+  border: 1px solid #8c959f;
+  border-radius: 0.35rem;
+}
+
+.copy-code-button:hover {
+  background: #eaeef2;
+}
+
+.copy-code-button:focus-visible {
+  outline: 2px solid #0969da;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 1rem;
+  }
+}
+
+@media print {
+  .copy-code-button {
+    display: none;
+  }
+
+  .code-block-wrapper pre {
+    padding-top: 1rem;
+  }
+}

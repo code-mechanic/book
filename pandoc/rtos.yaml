@@ -1,4 +1,5 @@
 toc: true
+toc-depth: 2
 number-sections: true
 
 pdf-engine: xelatex
