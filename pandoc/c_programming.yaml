@@ -11,6 +11,10 @@ include-in-header:
 filters:
   - filters/number-code-lines.lua
   - filters/boxed-tables.lua
+  - filters/admonitions.lua
+
+include-after-body:
+  - pandoc/latex/index.tex
 
 variables:
   geometry:

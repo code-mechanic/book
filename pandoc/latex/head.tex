@@ -70,3 +70,37 @@
   \definecolor{shadecolor}{HTML}{F5F5F5}
   \renewcommand{\theFancyVerbLine}{\CodeLineNumberSize\arabic{FancyVerbLine}}
 }
+
+% Advanced Book Improvements
+
+% 1. Admonitions
+\definecolor{infobg}{HTML}{E8F4F8}
+\definecolor{warningbg}{HTML}{FDF3E1}
+\definecolor{successbg}{HTML}{EAF7EA}
+
+\newenvironment{info}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=infobg, linecolor=infobg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]\textbf{\textsf{Info:}}\par\smallskip}
+  {\end{mdframed}}
+
+\newenvironment{warning}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=warningbg, linecolor=warningbg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]\textbf{\textsf{Warning:}}\par\smallskip}
+  {\end{mdframed}}
+
+\newenvironment{success}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=successbg, linecolor=successbg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]\textbf{\textsf{Tip:}}\par\smallskip}
+  {\end{mdframed}}
+
+% 2. Code Block Line Wrapping
+\usepackage{fvextra}
+\fvset{breaklines=true, breakanywhere=true}
+
+% 3. Beautiful Table of Contents
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{Chapter }
+\renewcommand{\cftchapaftersnum}{:}
+\renewcommand{\cftchapnumwidth}{6em}
+
+% 4. Index Generation
+\usepackage{makeidx}
+\makeindex

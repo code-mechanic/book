@@ -1,0 +1,11 @@
+\let\oldmaketitle\maketitle
+\renewcommand{\maketitle}{
+  \begin{titlepage}
+  \thispagestyle{empty}
+  \centering
+  \vspace*{1cm}
+  \includegraphics[width=0.9\textwidth]{rtos/diagrams/cover.png}
+  \end{titlepage}
+  \clearpage
+  \oldmaketitle
+}
