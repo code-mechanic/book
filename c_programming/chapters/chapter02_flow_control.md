@@ -40,7 +40,7 @@ if( condition ) {
 ```
 
 - If condition is `True` then (1), (2) and (3) will execute.  
-- If condition is `False` then (1) and (2) will execute.
+- If condition is `False` then (1) and (3) will execute.
 
 +--------------------------+---+--------------------------+
 | ```c                     |   | ```c                     |
@@ -154,7 +154,7 @@ void main()
 {
     printf("A");
     printf("B");
-    if(3 > 2);        // Compier will execute this with meaningless
+    if(3 > 2);        // Compiler will execute this with meaningless
     {                 // Dummy body start
         printf("C");
         printf("D");
@@ -167,7 +167,7 @@ void main()
 // ABCDEF
 ```
 
-Exmaple 4:
+Example 4:
 
 +----------------------+---+----------------------+---+----------------------+
 | ```c                 |   | ```c                 |   | ```c                 |
@@ -191,7 +191,7 @@ Exmaple 4:
 | ```                  |   | ```                  |   | ```                  |
 +----------------------+---+----------------------+---+----------------------+
 
-**Interview based program**
+**Interview-based program**
 
 ```C
 void main()
@@ -324,7 +324,7 @@ A massive interview trap involves using the assignment operator (`=`) inside an 
 
 If you write `if (a = 0)`, `0` is assigned to `a`, and the expression evaluates to `0` (False), triggering the `else` block. 
 
-**Why Assignment operator has this behaviour?**
+**Why does the Assignment operator have this behaviour?**
 
 ```c
 int a1, b1, c1;
@@ -759,7 +759,7 @@ while( condition 1 ) {
 }
 ```
 
-**Simple uscase**
+**Simple use case**
 
 +----------------------+---+--------------------------+
 | ```c                 |   | ```c                     |
@@ -945,7 +945,7 @@ for(init; condition; re-init) {
 
 In C, the initialization, condition, and reinitialization statements are entirely optional, but the **two semicolons are mandatory**. You can declare multiple variables in the initialization phase separated by commas. If you leave the condition empty, the compiler defaults it to True, resulting in an infinite loop (`for(;;)`).
 
-- Function call can be the part of init and re-int.
+- Function call can be part of init and re-init.
 
 ```c
 #include <stdio.h>
@@ -1087,7 +1087,7 @@ while(a < 1) {
 ```
 
 ```c
-/*This execute the body atlease 1 time irrespective of condition */
+/*This executes the body at least 1 time irrespective of condition */
 
 a = 1;
 do {
@@ -1104,7 +1104,7 @@ a = 1;
 do
 while(a < 1);
 
-// Wrong body (or) atleast one statement must be there
+// Wrong body (or) at least one statement must be there
 ```
 
 ```c
@@ -1652,7 +1652,7 @@ void main() {
 ```
 
 - `case` and `default` can be written in any order.
-- Negative case also allowed.
+- Negative cases are also allowed.
 
 ```c
 void main() {
@@ -1689,7 +1689,7 @@ void main() {
 // Compilation Error: continue keyword outside loop
 ```
 
-- Every `case` value should be constant expression and its result should be unique. No repeated case, float and variables are allowed.
+- Every `case` value should be a constant expression and its result should be unique. No repeated cases, floats, or variables are allowed.
 
 ```c
 void main() {
@@ -1793,8 +1793,8 @@ void main() {
 // Output
 // F
 
-// If there is no space between case and integer constant then that is consider
-// as label for goto
+// If there is no space between case and integer constant then that is considered
+// as a label for goto
 ```
 
 ```c

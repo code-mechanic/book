@@ -317,7 +317,7 @@ int main() {
 
 ## Array of Structures
 
-An array is a collection of similar data types. An Array of Structures operates identically but allocates chunks of contiguous memory per structure block. To iterate or manipulate arrays of structures safely, programmers use arrays indices mapped with pointers.
+An array is a collection of similar data types. An Array of Structures operates identically but allocates chunks of contiguous memory per structure block. To iterate or manipulate arrays of structures safely, programmers use array indices mapped with pointers.
 
 Incrementing a pointer interacting with an array of structures tests standard evaluation priorities.
 

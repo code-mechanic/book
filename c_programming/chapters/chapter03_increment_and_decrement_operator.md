@@ -264,13 +264,13 @@ void main() {
 
 ### Examples with flow control
 
-> If we are trying to change a variable value more than once in single statement the result is dependant on compiler
+> If we are trying to change a variable value more than once in a single statement, the result is dependent on the compiler
 
 ```c
 void main() {
     int a = 5;
     int b = ++a * a++ * ++a;
-    /* Turbo C compier
+    /* Turbo C compiler
          1.  6  * a++ * 7
          2.  7  * a++ * 7
          3.  7  * 7   * 7
@@ -279,7 +279,7 @@ void main() {
          b = 343
     */
 
-    /* gcc compier
+    /* gcc compiler
              6  * 6 * 8
 
          a = 8
@@ -447,7 +447,7 @@ void main() {
     int a = b = c = 1;
     int d;
 
-    // (++a && ++b) && ++c; This group is done depends on precedance
+    // (++a && ++b) && ++c; This group is done depends on precedence
     d = ++a && ++b && ++c;
     // d = (2 && 2) && ++c;
     // d = (1) && ++c;
@@ -459,12 +459,12 @@ void main() {
     // d = (1) || ++c; Here First arg is non zero for logical OR so don't execute rest
     // Output: a = 2, b = 2, c = 1, d = 1
 
-    // (++a || ++b) || ++c; This group is done depends on precedance
+    // (++a || ++b) || ++c; This group is done depends on precedence
     d = ++a || ++b || ++c;
     // Output: a = 2, b = 1, c = 1, d = 1
 
     //  ++a || (++b && ++c); This group is depends on priority
-    // The operands can be group based on priority and precedance but
+    // The operands can be group based on priority and precedence but
     // compulsory execute operands from left to right.
     d = ++a || ++b && ++c;
     // Output: a = 2, b = 1, c = 1, d = 1
@@ -490,7 +490,7 @@ void main() {
     int a = b = c = -1;
     int d;
 
-    // (++a && ++b) && ++c; This group is done depends on precedance
+    // (++a && ++b) && ++c; This group is done depends on precedence
     d = ++a && ++b && ++c;
     // d = (0 && ++b) && ++c;
     // d = (0) && ++c;
@@ -503,7 +503,7 @@ void main() {
     // d = (0) || (0);
     // Output: a = 2, b = -1, c = 0, d = 0
 
-    // (++a || ++b) || ++c; This group is done depends on precedance
+    // (++a || ++b) || ++c; This group is done depends on precedence
     d = ++a || ++b || ++c;
     // Output: a = 0, b = 0, c = 0, d = 0
 
@@ -532,7 +532,7 @@ void main() {
     int a = b = c = 1;
     int d;
 
-    // (a++ && b++) && c++; This group is done depends on precedance
+    // (a++ && b++) && c++; This group is done depends on precedence
     d = a++ && b++ && c++;
     // d = (1 && 1) && c++;
     // d = (1) && c++;
@@ -544,7 +544,7 @@ void main() {
     // d = (1) || c++; Here First arg is zero for logical OR so execute rest
     // Output: a = 2, b = 2, c = 1, d = 1
 
-    // (a++ || b++) || c++; This group is done depends on precedance
+    // (a++ || b++) || c++; This group is done depends on precedence
     d = a++ || b++ || c++;
     // Output: a = 2, b = 1, c = 1, d = 1
 
@@ -573,7 +573,7 @@ void main() {
     int a = b = c = 0;
     int d;
 
-    // (a++ && b++) && c++; This group is done depends on precedance
+    // (a++ && b++) && c++; This group is done depends on precedence
     d = a++ && b++ && c++;
     // d = (0 && b++) && c++;
     // d = (0) && c++;
@@ -585,7 +585,7 @@ void main() {
     // d = (0) || c++; Here First arg is zero for logical OR so execute rest
     // Output: a = 1, b = 0, c = 1, d = 0
 
-    // (a++ || b++) || c++; This group is done depends on precedance
+    // (a++ || b++) || c++; This group is done depends on precedence
     d = a++ || b++ || c++;
     // Output: a = 1, b = 1, c = 1, d = 0
 
@@ -646,7 +646,7 @@ void main() {
 */
 ```
 
-Example 21:
+Example 22:
 
 ```c
 void main() {
@@ -671,7 +671,7 @@ void main() {
 */
 ```
 
-Example 22:
+Example 23:
 
 ```c
 void main() {

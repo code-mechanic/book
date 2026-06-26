@@ -20,7 +20,7 @@ Shorthand operators append an arithmetic or bitwise operator directly to the ass
 
 *   The syntax `x += 3` is exactly equivalent to `x = x + 3`.
 *   Shorthand assignments are strictly applicable to **binary arithmetic** and **binary bitwise** operators. 
-*   They cannot be used with unary operators, such as the ones complement (`~`), because a unary operation only takes one operand.
+*   They cannot be used with unary operators, such as the one's complement (`~`), because a unary operation only takes one operand.
 
 ### Precedence Traps
 
@@ -44,7 +44,7 @@ void main() {
 **Key Summary: Shorthand Assignment**
 
 *   Shortens expressions like `A = A - B` into `A -= B`.
-*   Only applicable to arithmetic and bitwise operators (except ones complement).
+*   Only applicable to arithmetic and bitwise operators (except one's complement).
 *   Has very low precedence and evaluates strictly from right to left.
 
 ---

@@ -1,6 +1,6 @@
 \newpage
 
-# Concepts and Recommandations
+# Concepts and Recommendations
 
 ## The Pitfalls of Dynamic Memory (malloc)
 
@@ -8,7 +8,7 @@ In a standard PC application, you use malloc and free without much thought. In a
 
 - **Non-Determinism:** malloc takes a variable amount of time to find a free block. In a real-time system, you need to know exactly how long an operation takes.
 
-- **Fragmentation:** Over time, allocating and freeing small chunks of memory creates "holes." Eventually, you might have 10KB of free memory total, but not a single continuous 2KB block, causing the system to crash.
+- **Fragmentation:** Over time, allocating and freeing small chunks of memory creates "holes." Eventually, you might have 10KB of free memory total, but not a single contiguous 2KB block, causing the system to crash.
 
 - **Solution:** Most RTOS developers use Static Allocation or Memory Pools (fixed-size blocks) to ensure memory is always available and allocation time is constant.
 
@@ -33,7 +33,7 @@ While Semaphores are great for signals, Queues are the gold standard for data.
 
 - **Copy by Value vs. Copy by Reference:** Small data (like a sensor integer) is copied directly into the queue. For large data (like a 1MB image buffer), you put the pointer to the data in the queue.
 
-- **Thread Safety:**S Queues are internally protected by the RTOS. You don't need to wrap a queue in a Mutex; the RTOS handles the locking for you.
+- **Thread Safety:** Queues are internally protected by the RTOS. You don't need to wrap a queue in a Mutex; the RTOS handles the locking for you.
 
 ## Software Timers vs. Hardware Timers
 
@@ -72,7 +72,7 @@ Sometimes, a task needs to wait for multiple things to happen before it can proc
 
 ## Odd / Even Print
 
-- **Problem:** Create a two tasks where one task print odd number and another prints even number but while printing the numbers should be in 1, 2, 3, 4, ... and So on.
+- **Problem:** Create two tasks where one task prints odd numbers and another prints even numbers, but while printing, the numbers should be in order: 1, 2, 3, 4, ... and so on.
 
 **Code**
 ```C
@@ -149,7 +149,7 @@ void Consumer(void) {
 
 - **The Problem:** A High-Priority Sensor Task is producing data faster than a Low-Priority Display Task can process and render it. Because the queue has a fixed size, it eventually hits its limit (becomes full).
 
-- **THe Challenge:** If the High-Priority task tries to send data to a full queue, it faces a dilemma:
+- **The Challenge:** If the High-Priority task tries to send data to a full queue, it faces a dilemma:
 
     - **Block:** If it waits for space, the high-priority task stops running, potentially missing critical sensor samples (Timing Jitter).
 

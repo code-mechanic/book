@@ -402,7 +402,7 @@ void main() {
     // sizeof(f)       => 4 bytes (Size of float)
     // sizeof(FP)      => 2 bytes (Size of float pointer!)
     // sizeof(*FP)     => 4 bytes (Size of value at 700, which is float)
-    // sizeof(float)   => 2 bypes
+    // sizeof(float)   => 2 bytes
     // sizeof(float *) => 2 bytes
 }
 ```
@@ -491,13 +491,13 @@ void main() {
 }
 ```
 
-> If pointer arthmatic with integer happens then below is the generic formula
+> If pointer arithmetic with integer happens then below is the generic formula
 >
 > **New Address = Current Address ± ( sizeof(pointer DataType) × N )**
 
 ---
 
-### Summary keypoints
+### Summary Keypoints
 
 Based on the rules of `sizeof` and pointers, memorize these true/false evaluations:
 
@@ -538,7 +538,7 @@ void main() {
 }
 ```
 
-**Concept Code: Extracting Bytes from an long Integer**
+**Concept Code: Extracting Bytes from a Long Integer**
 
 ```c
 /* ========================================================================
@@ -748,7 +748,7 @@ void void_sizeof_rules() {
 ***
 
 ## Wild and NULL Pointer
-## callbyvalue and callbyreferance
+## Call by Value and Call by Reference
 ## Dangling Pointer
 ## Recursion on Pointers
 ## Pointer to Pointer

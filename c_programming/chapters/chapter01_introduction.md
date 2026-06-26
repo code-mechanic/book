@@ -2,13 +2,13 @@
 
 Learning C programming is similar to learning English. In English, we use Alphabets to form Words, Words to form Sentences, and Grammar to construct meaning. In C, we use Keywords (32 alphabets), Operators (45 words), Separators, and Syntax (the grammar) to write programs. This chapter introduces the foundational building blocks of C, including basic data types, input/output formatting, mathematical operations, and the strict rules for defining variables and logic.
 
-- Comparision between English language and C programming language
+- Comparison between English language and C programming language
 
 | **English Language**               | **C Language**       |
 |------------------------------------|----------------------|
 | 1. Alphabets (`a, b, c, ...`)      | 1. Keywords (`32`)   |
-| 2. Works (`More than 10K`)         | 2. Operators (`45`)  |
-| 3. Sentance (`Grammer makes this`) | 3. Separators (`14`) |
+| 2. Words (`More than 10K`)         | 2. Operators (`45`)  |
+| 3. Sentence (`Grammar makes this`) | 3. Separators (`14`) |
 |                                    | 4. Constants         |
 
 
@@ -33,14 +33,14 @@ Dennis Ritchie (the creator of C) classified constants into three primary data t
 *   **Real (`float`):** Any number containing a decimal point (e.g., `5.25`). It is called "float" because the decimal point can "float" or change positions depending on the number's precision.
 *   **Character (`char`):** Any single character strictly enclosed in single quotes. The length inside the quotes must be exactly one (e.g., `'a'` is valid, `'ab'` is invalid).
 
-| **Item** | **value**                       | **C datatype** |
+| **Item** | **Value**                       | **C datatype** |
 |----------|---------------------------------|----------------|
 | Integer  | `5`, `-5`, `0`                  | int            |
 | real     | `5.12`, `0.39`, `5.00`, `-3.25` | float          |
-| charater | `'a'`, `'5'`                    | char           |
+| character | `'a'`, `'5'`                    | char           |
 
 - Primary / Primitive / Fundamental / Basic data types in C
-    - `Data` is a meaningfull information
+    - `Data` is meaningful information
     - `Datatype` is a different kind of data like `int`, `float` and `Char`
 
 ### Comprehensive Format Specifiers
@@ -127,7 +127,7 @@ int main() {
 }
 ```
 
-Every expression is replaced with constant
+Every expression is replaced with a constant
 
 ```C
 int main() {
@@ -139,7 +139,7 @@ int main() {
     b = -c; // b = -9
     a = -b; // a = 9
 
-    -c = a; // Error because l-value is expresion not a variable
+    -c = a; // Error because l-value is expression not a variable
 }
 ```
 
@@ -561,8 +561,8 @@ To solve chaining, we combine isolated relational statements using Logical opera
 | 1     | 0     | 0          | 1            | 0      | 1      |
 | 1     | 1     | 1          | 1            | 0      | 0      |
 
-> - Whenever we are having 'N' condition and if we are depend on all 'N' condition at that time we are going for `AND` logic
-> - When there are 'N' condition and if we are depend on any 1 condition that time we gone for `OR` logic
+> - Whenever we have 'N' conditions and if we depend on all 'N' conditions, at that time we go for `AND` logic
+> - When there are 'N' conditions and if we depend on any 1 condition, at that time we go for `OR` logic
 > - `NOT` is used in negative test condition
 
 ### Short-Circuit Evaluation and Operand Execution
@@ -626,7 +626,7 @@ int main() {
 - output depends on arg1
 
 ++x + ++y;
-// Here ++y executed first or ++x executed first? compiler depandant
+// Here ++y executed first or ++x executed first? compiler dependent
 
 ++x && ++y
 // here ++x only executed first

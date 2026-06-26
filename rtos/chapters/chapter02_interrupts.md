@@ -71,7 +71,7 @@ When an interrupt arrives and its priority is higher than the currently executin
     3. CPU resumes interrupted instruction stream
 
 
-This hardware-assisted save/restore is fast (~12 cycles on Cortex-M4) and is what makes ISRs practical for tight-timing applications. The RTOS context switch mechanism.
+This hardware-assisted save/restore is fast (~12 cycles on Cortex-M4) and is what makes ISRs practical for tight-timing applications. The RTOS context switch mechanism builds directly on top of this hardware capability.
 
 ## The Foreground / Background Model
 

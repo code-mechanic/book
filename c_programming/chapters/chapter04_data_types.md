@@ -286,7 +286,7 @@ Memorizing these powers of 2 is highly beneficial for future operations:
 ### Character Constants & ASCII Values
 
 *   A character constant is any content represented inside a pair of single quotes (e.g., `'A'`). The content inside the single quotes must have a length of exactly one.
-*   Systems and compilers only understand binary data, not alphabetical characters. To standardise this, the ASCII (American Standard Code for Information Interchange) committee assigned integer values to characters.
+*   Systems and compilers only understand binary data, not alphabetical characters. To standardize this, the ASCII (American Standard Code for Information Interchange) committee assigned integer values to characters.
 *   **Important ASCII Values to Remember:**
     *   `'A'` = 65, `'B'` = 66, `'C'` = 67 ... `'Z'` = 90.
     *   `'a'` = 97, `'b'` = 98, `'d'` = 100 ... `'z'` = 122.
@@ -423,7 +423,7 @@ When `-1` is assigned to `ch`, the compiler recognizes it is out of bounds. Ther
 
 ## Short int Data Type
 
-This section covers both the signed and unsigned versions of the `short int` data type, detailing their behaviors, ranges, and crucial rules like the Type Promotionality Rule.
+This section covers both the signed and unsigned versions of the `short int` data type, detailing their behaviors, ranges, and crucial rules like the Type Promotion Rule.
 
 ---
 
@@ -496,9 +496,9 @@ If you assign `-1` to an `unsigned short` variable, it falls one step below the 
 
 ---
 
-### The Type Promotionality Rule (Important Concept)
+### The Type Promotion Rule (Important Concept)
 
-A highly critical rule in C operations is the **Type Promotionality Rule**: Whenever you perform an operation (like addition or comparison), both arguments must be of the same data type. If they are not, the compiler automatically 
+A highly critical rule in C operations is the **Type Promotion Rule**: Whenever you perform an operation (like addition or comparison), both arguments must be of the same data type. If they are not, the compiler automatically 
 
 **promotes the lower data type to the higher data type**.
 
@@ -826,11 +826,11 @@ sizeof(4.75 > 2.5);
 
 ---
 
-### The Type Promotionality Trap with sizeof
+### The Type Promotion Trap with sizeof
 
 The `sizeof` operator always returns a size, and a memory size is always a strictly positive number. Therefore, the return type of `sizeof` is implicitly an **`unsigned` integer** (also internally defined as `size_t`).
 
-This leads to a famous interview trap using the Type Promotionality Rule:
+This leads to a famous interview trap using the Type Promotion Rule:
 ```c
 if (sizeof(int) > -1) {
     printf("Hello");

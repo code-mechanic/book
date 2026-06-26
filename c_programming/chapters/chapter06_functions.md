@@ -184,7 +184,7 @@ If a function call appears above its definition, a compilation error occurs.
 | }                            |   | }                            |
 |                              |   |                              |
 | // Output:                   |   | // Output:                   |
-| // Hello, World!             |   | // Reclaraion error          |
+| // Hello, World!             |   | // Redeclaration error       |
 |                              |   |                              |
 | ```                          |   | ```                          |
 +------------------------------+---+------------------------------+
@@ -493,7 +493,7 @@ Even though the `static` variable is alive for the entire program, its **scope**
 | ```                          |   | ```                          |
 +------------------------------+---+------------------------------+
 
-you absolutely can create a static variable with the exact same name in two different functions.
+You absolutely can create a static variable with the exact same name in two different functions.
 
 ```c
 #include <stdio.h>
@@ -1156,7 +1156,7 @@ void main() {
 }
 ```
 
-### Why heap and stack are opposite to each other?
+### Why Are Heap and Stack Opposite to Each Other?
 
 It was the most efficient way to maximize the use of a single, contiguous block of limited memory.
 

@@ -113,12 +113,12 @@
 
 - Devicetree describes what hardware exists and how it is connected.
 - Board and SoC definitions live in `.dts` and `.dtsi` files.
-- Applications customize harware using Devicetree overlays.
-- Zephyr generates headers and macros from Devicetree at build time
+- Applications customize hardware using Devicetree overlays.
+- Zephyr generates headers and macros from Devicetree at build time.
 
 ![Devicetree](rtos/diagrams/zephyr_devicetree.png){ width=75% }
 
-> In Zephyr the devicetree is the single source of truth for your hardware
+> In Zephyr the devicetree is the single source of truth for your hardware.
 
 ### West Fundamentals
 
@@ -129,7 +129,7 @@
 ### Zephyr logging
 
 - Zephyr logging provides leveled logs (error to debug) with deferred processing.
-- Backends include RTT(Real-Time Transfer), UART and others. We can choose per board and bandwidth needs.
+- Backends include RTT (Real-Time Transfer), UART, and others. We can choose per board and bandwidth needs.
 - Configure levels and formatting via `CONFIG_LOG_*` options in `prj.conf`.
 
 ![Zephyr logging](rtos/diagrams/zephyr_logging.png){ width=75% }

@@ -1,10 +1,10 @@
-## Analysis on time and space complexity
-## sorting
-## Linked list
-## stack and queue
+## Analysis on Time and Space Complexity
+## Sorting
+## Linked List
+## Stack and Queue
 ## Tree
-## Binary search tree
-## Greedy algo
-## Dynamic programming
+## Binary Search Tree
+## Greedy Algorithm
+## Dynamic Programming
 ## Heap
 ## Graph
