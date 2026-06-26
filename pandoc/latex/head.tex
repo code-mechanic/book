@@ -12,13 +12,34 @@
 \usepackage{mdframed}
 \usepackage{placeins}
 \usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Configure fancyhdr
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Configure titlesec for elegant chapter headings
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\sffamily}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\sffamily}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\sffamily}{\thesubsection}{1em}{}
+\newcommand{\sectionbreak}{\clearpage}
 
 \makeatletter
 \def\fps@figure{H}
 \makeatother
 
 \IfFileExists{pandoc/fonts/MonaSans-Regular.ttf}
-  {\setmainfont[Path=pandoc/fonts/]{MonaSans-Regular.ttf}}
+  {\newfontfamily\sffamily[Path=pandoc/fonts/]{MonaSans-Regular.ttf}
+   \setmainfont{Linux Libertine O}}
   {\setmainfont{Linux Libertine O}}
 
 \IfFileExists{pandoc/fonts/Monaco.ttf}
