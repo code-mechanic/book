@@ -2,7 +2,6 @@
 
 Standard C programs execute in memory, and any output directed to the console is permanently lost the moment the program or console window is closed. To save the results of an application persistently—such as creating diagnostic log files, saving user progress, or tracking network statuses—programmers must redirect data to the hard disk. This concept is called File Handling. Files in C are broadly categorized into two types: Text files (like `.txt` documents) and Binary files (like images, audio, and raw structure blocks). 
 
-**Table of Contents:**
 *   [File Streams and Opening Files](#file-streams-and-opening-files)
 *   [Writing and Appending Data](#writing-and-appending-data)
 *   [Reading Data and EOF](#reading-data-and-eof)
