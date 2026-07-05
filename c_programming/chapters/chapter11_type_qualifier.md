@@ -1,5 +1,5 @@
 
-# Type Qualifiers: const and volatile
+# Type Qualifiers: *const* and *volatile*
 
 Type qualifiers do not change the size or data type of a variable; rather, they completely alter the variable's behavioral properties during compilation and runtime. C provides two primary type qualifiers: `const` and `volatile`. While `const` restricts a programmer from modifying a variable, `volatile` strictly instructs the compiler on how to interact with hardware memory. Mastering these two keywords is absolutely essential for writing secure, optimized, and hardware-level embedded C code.
 
@@ -37,7 +37,8 @@ int main() {
     const j = 20; 
     
     // Uninitialized constant becomes a permanent garbage value
-    const int k; 
+    const int k;
+    k = 30; // Compilation error
     
     sum(i, j);
     return 0;
@@ -63,29 +64,111 @@ When combining `const` with pointers, the placement of the keyword completely al
 
 int main() {
     int a = 10, b = 20;
-    
+
+/*
+    ╭────── a ──────╮    ╭────── b ──────╮
+    ┌───────────────┐    ┌───────────────┐
+    │      10       │    │      20       │
+    └───────────────┘    └───────────────┘
+           500                  504
+*/
+
     /* 1. POINTER TO CONSTANT */
     // 'const' is before 'int'. The integer value is locked.
     const int *p1 = &a; 
     p1 = &b;        // VALID: Can change where pointer looks
     // *p1 = 888;   // INVALID: Cannot change the target's value
-    
+
+/*
+    ╭─── p1 ───╮           ╭────── a ──────╮
+    ┌──────────┐           ┌───────────────┐
+    │   [RW]   │── 500 ───>│   [LOCKED]    │
+    └──────────┘           └───────────────┘
+     Can re-point            Cannot modify
+      (e.g., to b)             target value
+*/
+
     /* 2. CONSTANT POINTER */
     // 'const' is before 'p2'. The pointer's address is locked.
     int * const p2 = &a;
     *p2 = 888;      // VALID: Can change the target's value
     // p2 = &b;     // INVALID: Cannot change where pointer looks
-    
+
+/*
+    ╭─── p2 ───╮           ╭────── a ──────╮
+    ┌──────────┐           ┌───────────────┐
+    │ [LOCKED] │── 500 ───>│     [RW]      │
+    └──────────┘           └───────────────┘
+   Cannot re-point            Can modify 
+    (stuck on a)             target value
+*/
+
     /* 3. CONSTANT POINTER TO CONSTANT */
     // 'const' is before both 'int' and 'p3'. Both are strictly locked.
     const int * const p3 = &a;
     // *p3 = 888;   // INVALID
     // p3 = &b;     // INVALID
-    
+
+/*
+    ╭─── p3 ───╮           ╭────── a ──────╮
+    ┌──────────┐           ┌───────────────┐
+    │ [LOCKED] │── 500 ───>│   [LOCKED]    │
+    └──────────┘           └───────────────┘
+   Cannot re-point           Cannot modify
+*/
+
     /* INTERCHANGEABLE SYNTAX */
     // "const int *p" and "int const *p" behave exactly the same.
     int const *p4 = &a; 
-    
+
+
+    int **p;
+    // p = <something>   // VALID
+    // *p = <something>  // VALID
+    // **p = <something> // VALID
+
+/*
+    ╭─── p ────╮        ╭─── *p ───╮        ╭── **p ───╮
+    ┌──────────┐        ┌──────────┐        ┌──────────┐
+    │   [RW]   │───────>│   [RW]   │───────>│   [RW]   │ 
+    └──────────┘        └──────────┘        └──────────┘
+*/
+
+    int * const *p;
+    // p = <something>   // VALID
+    // *p = <something>  // INVALID
+    // **p = <something> // VALID
+
+/*
+    ╭─── p ────╮        ╭─── *p ───╮        ╭── **p ───╮
+    ┌──────────┐        ┌──────────┐        ┌──────────┐
+    │   [RW]   │───────>│ [LOCKED] │───────>│   [RW]   │ 
+    └──────────┘        └──────────┘        └──────────┘
+*/
+    int const ** const p;
+    // p = <something>   // INVALID
+    // *p = <something>  // VALID
+    // **p = <something> // INVALID
+
+/*
+    ╭─── p ────╮        ╭─── *p ───╮        ╭── **p ───╮
+    ┌──────────┐        ┌──────────┐        ┌──────────┐
+    │ [LOCKED] │───────>│   [RW]   │───────>│ [LOCKED] │ 
+    └──────────┘        └──────────┘        └──────────┘
+*/
+
+    int * const * const * const p;
+    // p = <something>    // INVALID
+    // *p = <something>   // INVALID
+    // **p = <something>  // INVALID
+    // ***p = <something> // VALID
+
+/*
+    ╭─── p ────╮        ╭─── *p ───╮        ╭── **p ───╮        ╭─ ***p ───╮
+    ┌──────────┐        ┌──────────┐        ┌──────────┐        ┌──────────┐
+    │ [LOCKED] │───────>│ [LOCKED] │───────>│ [LOCKED] │───────>│   [RW]   │ 
+    └──────────┘        └──────────┘        └──────────┘        └──────────┘
+*/
     return 0;
 }
 ```
@@ -188,6 +271,7 @@ When a pointer is marked as both `const` and `volatile`, it creates a strict set
 
 int main() {
     // Both qualifiers applied to the pointer's target
+    // Also this informs that register address is read only
     const volatile int *p = (const volatile int*)0xFA0D;
     
     // *p = 5; // ERROR: Programmer cannot modify due to 'const'

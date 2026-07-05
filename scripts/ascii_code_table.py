@@ -13,47 +13,82 @@ import sys
 programs: dict[str, str] = {
     "program1": 
     """
-void show() {
-    printf("Hello, World!");
-}
+struct IMEI
+{
+    char cc[2];
+    char mfc[2];
+    char sar[2];
+    char mn[4];
+    char usn[6];
+}; // 16 Bytes total
 
-void main() {
-    show();
+void main()
+{
+    struct IMEI i;
+    
+    strcpy(i.cc, "10");
+    strcpy(i.mfc, "35");
+    strcpy(i.sar, "12");
+    strcpy(i.mn, "1769"); 
+    strcpy(i.usn, "1AB341");
+    
+    // Outputs: 10351217691AB341
+    printf("%s%s%s%s%s", i.cc, i.mfc, 
+            i.sar, i.mn, i.usn); 
+/*
+      cc     mfc    sar    mn     usn
+   ┌──────┬──────┬──────┬──────┬────────┐
+   │  10  │  35  │  12  │ 1769 │ 1AB341 │
+   └──────┴──────┴──────┴──────┴────────┘
+    2 char 2 char 2 char 4 char  6 char
+*/
 }
-
-// Output:
-// Hello, World!
     """,
 
     "program2":
     """
-void main() {
-    show();
-}
+union OIMEI
+{
+    struct IMEI
+    {
+        char cc[2];
+        char mfc[2];
+        char sar[2];
+        char mn[4];
+        char usn[6];
+    } in; // 16 Bytes
+    
+    char obuffer[16];
+}; // 16 Bytes total
 
-void show() {
-    printf("Hello, World!");
+void main()
+{
+    union OIMEI o;
+    
+    strcpy(o.in.cc, "10");
+    strcpy(o.in.mfc, "35");
+    strcpy(o.in.sar, "12");
+    strcpy(o.in.mn, "1769");
+    strcpy(o.in.usn, "1AB341");
+    
+    // Outputs 10351217691AB341
+    printf("%s", o.obuffer); 
 }
-
-// Output:
-// Reclaraion error
+/*
+        cc     mfc    sar    mn      usn
+     ┌──────┬──────┬──────┬──────┬────────┐
+in   │  10  │  35  │  12  │ 1769 │ 1AB341 │
+     └──────┴──────┴──────┴──────┴────────┘
+     |<────────── obuffer[16] ───────────>|
+*/
     """,
 
     "program3":
     """
-float test() {
-    return 3.75;
-}
-
-void main() {
-    float f = test();
-    printf("%f", f);
-}
     """,
 
     "program4":
     """
-
     """,
 
     "program5":

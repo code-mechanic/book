@@ -81,7 +81,18 @@ int main() {
     // HARD CODE: Requesting strictly 10 bytes
     // Typecasting void* to int*
     int *p1 = (int*)malloc(10); 
-    
+
+/*
+      stack          │          heap
+                     │
+        p            │
+     ┌─────┐         │   ┌────┬────┬────┬────┬────┐
+     │ 500 │─────────┼──>│ 10 │ 20 │ 30 │ 40 │ 50 │
+     └─────┘         │   └────┴────┴────┴────┴────┘
+                     │   500
+                     │
+*/
+
     // NULL check is mandatory to prevent crashes
     if (p1 == NULL) {
         printf("Memory allocation failed.\n");
@@ -148,6 +159,9 @@ A pointer only points to the first byte of data. When calling `free(p)`, the fun
 *   Heap memory must be manually destroyed using `free()`.
 *   A Memory Leak occurs when memory is reserved on the heap but its address is lost, rendering it inaccessible.
 *   `free()` identifies how many bytes to destroy by reading a hidden header placed directly behind the starting address.
+*   **Wild pointer:** Pointer which is pointing to garbage memory location.
+*   **NULL pointer:** Pointer which is not pointing to any location.
+*   **Dangling pointer:** Pointer which is pointing to unallocated memory location.
 
 ***
 
@@ -253,19 +267,62 @@ int main() {
     int *p = (int*)malloc(2 * sizeof(int));
     *p = 10;
     *(p + 1) = 20;
-    
+
+/*
+      stack          │             heap
+                     │
+        p            │ ╭─ Allocated Block (8 Bytes) ──╮
+     ┌─────┐         │ ╭──── [0] ─────╮╭──── [1] ─────╮
+     │ 500 │─────────┼>┌──────────────┬───────────────┐
+     └─────┘         │ │      10      │      20       │
+                     │ └──────────────┴───────────────┘
+                     │  500            504
+*/
+
     // Expanding block to hold 5 integers safely
     p = (int*)realloc(p, 5 * sizeof(int));
-    
+
+/*
+   stack         │                  heap
+                 │
+    p            │ ╭────── Allocated Block (20 Bytes) ────────╮
+ ┌─────┐         │ ╭ [0] ╮╭ [1] ╮╭─ [2] ──╮╭─ [3] ──╮╭─ [4] ──╮
+ │ 500 │─────────┼>┌─────┬──────┬─────────┬─────────┬─────────┐
+ └─────┘         │ │  10 │  20  │ Garbage │ Garbage │ Garbage │
+                 │ └─────┴──────┴─────────┴─────────┴─────────┘
+                 │  500  504    508        512       516
+*/
+
     // Decreasing the block size is also perfectly valid
     // This forcibly deletes the data at the end of the block
     p = (int*)realloc(p, 1 * sizeof(int));
-    
+
+/*
+      stack          │       heap
+                     │
+        p            │ ╭─ Block (4B) ─╮
+     ┌─────┐         │ ╭──── [0] ─────╮
+     │ 500 │─────────┼>┌──────────────┐   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     └─────┘         │ │      10      │   ░░ (Memory addresses 504 through  ░░
+                     │ └──────────────┘   ░░  519 are freed back to the OS) ░░
+                     │  500               ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
+
     // INTERVIEW TRICK: realloc as a free() replacement
     // Requesting 0 bytes forces realloc to destroy the memory block entirely
     p = (int*)realloc(p, 0); 
     p = NULL;
-    
+
+/*
+      stack          │                     heap
+                     │
+        p            │
+     ┌─────┐         │    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     │  0  │─── X    │    ░░ Entire allocated memory block has been ░░
+     └─────┘         │    ░░    destroyed and returned to the OS    ░░
+      (NULL)         │    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
+
     return 0;
 }
 ```

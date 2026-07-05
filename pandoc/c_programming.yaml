@@ -33,5 +33,5 @@ variables:
   tables: true
 
 metadata:
-  title: C Programming Book
+  title: C Programming Book for Interview
   author: Mohan Arunachalam
