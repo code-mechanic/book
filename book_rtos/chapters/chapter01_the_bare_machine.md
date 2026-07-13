@@ -34,13 +34,13 @@ A microcontroller (MCU) is a **system-on-chip**: it integrates a CPU core, memor
 
 - **Internal Bus** — The AHB/APB bus (on ARM Cortex-M) or similar fabric that lets the CPU read/write memory and peripheral registers using the same address-space mechanism.
 
-![STM32 MCU block diagram](rtos/diagrams/ch1_mcu_anatomy.png)
+![STM32 MCU block diagram](book_rtos/diagrams/ch1_mcu_anatomy.png)
 
 ## The Memory Map
 
 When the CPU wants to read a byte, it puts an **address** on the bus. The bus fabric routes that address to the right destination — Flash, SRAM, or a peripheral register. This routing table is called the **memory map**.
 
-![Memory Map](rtos/diagrams/ch1_memory_map.png){ width=80% }
+![Memory Map](book_rtos/diagrams/ch1_memory_map.png){ width=80% }
 
 **Why this matters for RTOS:** When an RTOS writes to a GPIO pin, enables a timer, or pends a software interrupt — it is *simply writing a value to an address*. Understanding the memory map demystifies every line of peripheral driver code you will ever read.
 
@@ -132,7 +132,7 @@ void clock_init(void)
 }
 ```
 
-![Clock Tree](rtos/diagrams/ch1_clock_tree.png){ width=65% }
+![Clock Tree](book_rtos/diagrams/ch1_clock_tree.png){ width=65% }
 
 > **Key insight:** Every clock configuration is a sequence of register writes. The hardware handshake (`while(!(RCC->CR & flag))`) is critical — switching to an unstable clock is a common source of hard faults in embedded bring-up.
 
@@ -166,7 +166,7 @@ Power Applied
 
 The **vector table** is an array of 32-bit addresses stored at the very beginning of Flash. The CPU's very first act after reset is to read two entries from this table:
 
-![Vector Table - ARM Cortex-M](rtos/diagrams/ch1_vector_table.png){ width=45% }
+![Vector Table - ARM Cortex-M](book_rtos/diagrams/ch1_vector_table.png){ width=45% }
 
 ### Code: Minimal startup file (C version)
 
@@ -276,7 +276,7 @@ __attribute__((section(".isr_vector"))) const uint32_t vector_table[] = {
 
 Once `Reset_Handler` finishes, SRAM is organised into distinct regions. Understanding this layout prevents the most common class of embedded bugs: stack overflow and heap corruption.
 
-![SRAM layout](rtos/diagrams/ch1_sram_layout.png){ width=75% }
+![SRAM layout](book_rtos/diagrams/ch1_sram_layout.png){ width=75% }
 
 ### Code: Verifying the layout in code
 

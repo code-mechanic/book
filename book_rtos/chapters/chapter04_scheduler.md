@@ -29,13 +29,13 @@ FreeRTOS default: `preemptive`, `priority-based`, with `round-robin time-slicing
 
 Every scheduling decision is triggered by one thing: the **SysTick interrupt**. At every tick, the RTOS checks if a context switch is needed.
 
-![Conceptual Tick Interrupt flow](rtos/diagrams/ch4_tick_interrupt.png){ width=75% }
+![Conceptual Tick Interrupt flow](book_rtos/diagrams/ch4_tick_interrupt.png){ width=75% }
 
 ## Cooperative vs Preemptive Scheduling
 
 There are two fundamental scheduling models. Understanding both helps you reason about bugs.
 
-![Schedulers](rtos/diagrams/ch4_schedulers.png){ width=75% }
+![Schedulers](book_rtos/diagrams/ch4_schedulers.png){ width=75% }
 
 ## Priority-Based Scheduling
 

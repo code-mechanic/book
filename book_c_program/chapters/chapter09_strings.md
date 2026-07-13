@@ -672,7 +672,7 @@ In a 2D array, the row size is optional during initialization, but the column si
 
 **Basic 2D Array Construction**
 
-![2D Array memory layout](c_programming/diagrams/two_d_array.png)
+![2D Array memory layout](book_c_program/diagrams/two_d_array.png)
 
 ```c
 #include <stdio.h>

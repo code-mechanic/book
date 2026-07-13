@@ -89,7 +89,7 @@ int main() {
 
 ## List of all Operators
 
-![Operators](c_programming/diagrams/chapter1_introduction/operator_table.png){ width=75% }
+![Operators](book_c_program/diagrams/chapter1_introduction/operator_table.png){ width=75% }
 
 ## The Assignment Operator
 

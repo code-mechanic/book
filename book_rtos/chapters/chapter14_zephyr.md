@@ -86,7 +86,7 @@
 - Subsystems for networking, sensors, storage, Bluetooth, power management, and more.
 - Clear separation between kernel, drivers, and user application code.
 
-![Zephyr Architecture Overview](rtos/diagrams/zephyr_architecture_overview.png){ width=75% }
+![Zephyr Architecture Overview](book_rtos/diagrams/zephyr_architecture_overview.png){ width=75% }
 
 >  Zephyr layers a small kernel with selectable modular services.
 
@@ -97,7 +97,7 @@
 - Devicetree overlays describe hardware, buses, and device connections.
 - Build system uses CMake and `west` to generate the final executable.  
 
-![Zephyr Project Structure](rtos/diagrams/zephyr_project_structure.png){ width=75% }
+![Zephyr Project Structure](book_rtos/diagrams/zephyr_project_structure.png){ width=75% }
 
 >  Zephyr projects have clear app directories plus shared modules.
 
@@ -116,15 +116,15 @@
 - Applications customize hardware using Devicetree overlays.
 - Zephyr generates headers and macros from Devicetree at build time.
 
-![Devicetree](rtos/diagrams/zephyr_devicetree.png){ width=75% }
+![Devicetree](book_rtos/diagrams/zephyr_devicetree.png){ width=75% }
 
 > In Zephyr the devicetree is the single source of truth for your hardware.
 
 ### West Fundamentals
 
-![Zephyr build process: Command to Firmware](rtos/diagrams/zephyr_build_process.png)
+![Zephyr build process: Command to Firmware](book_rtos/diagrams/zephyr_build_process.png)
 
-![West Runners](rtos/diagrams/west_runners.png){ width=75% }
+![West Runners](book_rtos/diagrams/west_runners.png){ width=75% }
 
 ### Zephyr logging
 
@@ -132,7 +132,7 @@
 - Backends include RTT (Real-Time Transfer), UART, and others. We can choose per board and bandwidth needs.
 - Configure levels and formatting via `CONFIG_LOG_*` options in `prj.conf`.
 
-![Zephyr logging](rtos/diagrams/zephyr_logging.png){ width=75% }
+![Zephyr logging](book_rtos/diagrams/zephyr_logging.png){ width=75% }
 
 ## Examples
 

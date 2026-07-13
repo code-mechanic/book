@@ -25,7 +25,7 @@ The loop is **sequential and blocking**. While `blink_led()` sits in its half-se
 
 This is the **timing problem**: a single thread of execution cannot be in two places simultaneously.
 
-![Timeline of Superloop](rtos/diagrams/ch2_superloop_timeline.png){ width=50% }
+![Timeline of Superloop](book_rtos/diagrams/ch2_superloop_timeline.png){ width=50% }
 
 The hardware's answer to this is the **interrupt**: a signal that tells the CPU "stop what you are doing, handle me, then come back."
 
@@ -33,7 +33,7 @@ The hardware's answer to this is the **interrupt**: a signal that tells the CPU 
 
 An interrupt is a hardware signal that causes the CPU to **suspend its current execution**, save its state, and jump to a special function called an **Interrupt Service Routine (ISR)**. When the ISR returns, the CPU restores its state and resumes exactly where it left off.
 
-![ISR execution flow](rtos/diagrams/ch2_isr_flow.png){ width=50% }
+![ISR execution flow](book_rtos/diagrams/ch2_isr_flow.png){ width=50% }
 
 **Key points:**
 
@@ -47,7 +47,7 @@ This mechanism is implemented entirely in hardware — the CPU itself detects th
 
 On ARM Cortex-M, interrupts are managed by the **Nested Vectored Interrupt Controller (NVIC)**. It is the traffic cop between peripheral signals and the CPU.
 
-![Interrupt controller](rtos/diagrams/ch2_interrupt_controller.png){ width=75% }
+![Interrupt controller](book_rtos/diagrams/ch2_interrupt_controller.png){ width=75% }
 
 **Priority:** Lower number = higher priority.
 
@@ -58,7 +58,7 @@ On Cortex-M4 with 4 priority bits, valid priorities are 0 (highest) through 15 (
 
 When an interrupt arrives and its priority is higher than the currently executing code, the CPU performs an **automatic context save** (called "exception entry") in hardware:
 
-![ARM Cortex-M Exception Entry](rtos/diagrams/ch2_exception_entry.png){ width=75% }
+![ARM Cortex-M Exception Entry](book_rtos/diagrams/ch2_exception_entry.png){ width=75% }
 
 - After ISR stack frame push, CPU:
     1. Sets PC = ISR address  (from vector table)
@@ -77,7 +77,7 @@ This hardware-assisted save/restore is fast (~12 cycles on Cortex-M4) and is wha
 
 Once interrupts are in play, the system has two levels of execution:
 
-![Two level Model](rtos/diagrams/ch2_two_level_model.png){ width=75% }
+![Two level Model](book_rtos/diagrams/ch2_two_level_model.png){ width=75% }
 
 The ISR's job is simple: **detect the event, record it, return**. The heavy processing happens in the background where blocking is safe.
 
@@ -85,7 +85,7 @@ The ISR's job is simple: **detect the event, record it, return**. The heavy proc
 
 On ARM Cortex-M, a higher-priority interrupt can preempt a lower-priority ISR that is already running. This is **interrupt nesting**.
 
-![Nested Interrupt](rtos/diagrams/ch2_nested_interrupt.png)
+![Nested Interrupt](book_rtos/diagrams/ch2_nested_interrupt.png)
 
 ## Critical Sections — Protecting Shared Data
 

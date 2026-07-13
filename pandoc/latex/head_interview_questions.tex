@@ -1,0 +1,118 @@
+% Source - https://stackoverflow.com/a/54669722
+% Posted by jdhao, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-05-09, License - CC BY-SA 4.0
+
+\definecolor{bgcolor}{HTML}{E0E0E0}
+\definecolor{codeblockbgcolor}{HTML}{F5F5F5}
+\definecolor{quotebgcolor}{HTML}{E0E0E0}
+\definecolor{premiumblue}{HTML}{1A365D} % Elegant dark blue
+\let\oldtexttt\texttt
+\usepackage{array}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{mdframed}
+\usepackage{placeins}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Configure fancyhdr
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Configure titlesec for elegant chapter headings
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\sffamily}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\sffamily\color{premiumblue}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\sffamily\color{premiumblue}}{\thesubsection}{1em}{}
+
+% Adjust list spacing for MCQs and indent options
+\usepackage{enumitem}
+\setlist{itemsep=1em, topsep=1em, leftmargin=3em}
+
+\makeatletter
+\def\fps@figure{H}
+\makeatother
+
+\IfFileExists{pandoc/fonts/MonaSans-Regular.ttf}
+  {\newfontfamily\sffamily[Path=pandoc/fonts/]{MonaSans-Regular.ttf}
+   \setmainfont{Linux Libertine O}}
+  {\setmainfont{Linux Libertine O}}
+
+\setmonofont{DejaVu Sans Mono}
+
+\renewcommand{\texttt}[1]{
+  \colorbox{bgcolor}{\oldtexttt{#1}}
+}
+
+\newcommand{\QuoteIcon}{%
+  \tikz[baseline=-0.6ex, scale=0.18]{
+    \draw[fill=yellow!45, draw=black, line width=0.6pt] (0,1.55) circle (0.9);
+    \draw[draw=black, line width=0.6pt] (-0.45,0.85) -- (0.45,0.85) -- (0.32,0.3) -- (-0.32,0.3) -- cycle;
+    \draw[draw=black, line width=0.6pt] (-0.35,0.05) -- (0.35,0.05);
+  }%
+}
+
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=quotebgcolor, linecolor=quotebgcolor, linewidth=0pt, innertopmargin=0.8em, innerbottommargin=0.8em, innerleftmargin=1em, innerrightmargin=1em, skipabove=0.8em, skipbelow=0.8em]\QuoteIcon\par\smallskip\oldquote}
+  {\endoldquote\end{mdframed}}
+
+\providecommand{\CodeLineNumberSize}{\scriptsize}
+\providecommand{\theFancyVerbLine}{}
+\AtBeginDocument{
+  \definecolor{shadecolor}{HTML}{F5F5F5}
+  \renewcommand{\theFancyVerbLine}{\CodeLineNumberSize\arabic{FancyVerbLine}}
+}
+
+% Advanced Book Improvements
+
+% 1. Admonitions
+\definecolor{infobg}{HTML}{E8F4F8}
+\definecolor{warningbg}{HTML}{FDF3E1}
+\definecolor{successbg}{HTML}{EAF7EA}
+
+\newenvironment{info}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=infobg, linecolor=infobg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]\textbf{\textsf{Info:}}\par\smallskip}
+  {\end{mdframed}}
+
+\newenvironment{warning}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=warningbg, linecolor=warningbg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]\textbf{\textsf{Warning:}}\par\smallskip}
+  {\end{mdframed}}
+
+\newenvironment{success}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=successbg, linecolor=successbg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]\textbf{\textsf{Tip:}}\par\smallskip}
+  {\end{mdframed}}
+
+\definecolor{correctbg}{HTML}{EAF7EA}
+\newenvironment{correctbox}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=correctbg, linecolor=correctbg, linewidth=0pt, innertopmargin=1em, innerbottommargin=1em, innerleftmargin=1em, innerrightmargin=1em, skipabove=1em, skipbelow=1em]}
+  {\end{mdframed}}
+
+\definecolor{questionbg}{HTML}{F0F0F0}
+\newenvironment{questionbox}
+  {\FloatBarrier\begin{mdframed}[backgroundcolor=questionbg, linecolor=questionbg, linewidth=0pt, innertopmargin=1.2em, innerbottommargin=1.2em, innerleftmargin=1.2em, innerrightmargin=1.2em, skipabove=1em, skipbelow=1.5em]}
+  {\end{mdframed}}
+
+% 2. Code Block Line Wrapping
+\usepackage{fvextra}
+\fvset{breaklines=true, breakanywhere=true}
+
+% 3. Beautiful Table of Contents
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{Chapter }
+\renewcommand{\cftchapaftersnum}{:}
+\renewcommand{\cftchapnumwidth}{6em}
+
+% 4. Index Generation
+\usepackage{makeidx}
+\makeindex

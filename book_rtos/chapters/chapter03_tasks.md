@@ -8,7 +8,7 @@ A single-core CPU can only execute one instruction at a time. Yet every RTOS giv
 
 **By switching between them so fast that the human observer cannot tell they are taking turns.**
 
-![Task execution](rtos/diagrams/ch3_task_execution.png){ width=75% }
+![Task execution](book_rtos/diagrams/ch3_task_execution.png){ width=75% }
 
 To pull off this illusion, the RTOS needs two things:
 
@@ -19,13 +19,13 @@ To pull off this illusion, the RTOS needs two things:
 
 A task's **context** is everything the CPU needs to resume executing that task as if it had never been interrupted. On ARM Cortex-M, that is:
 
-![Task Context on ARM Cortex-M4](rtos/diagrams/ch3_task_context.png){ width=75% }
+![Task Context on ARM Cortex-M4](book_rtos/diagrams/ch3_task_context.png){ width=75% }
 
 ## The Task Control Block (TCB)
 
 The TCB is a data structure the RTOS maintains for every task. Think of it as a task's "file" in the OS. At minimum it must store the saved stack pointer so the context switch knows where to find the saved registers.
 
-![Task Control Block — Conceptual Layout](rtos/diagrams/ch3_tcb.png){ width=75% }
+![Task Control Block — Conceptual Layout](book_rtos/diagrams/ch3_tcb.png){ width=75% }
 
 In FreeRTOS this struct is called TCB_t (defined in tasks.c). The first field is always pxTopOfStack — because the context switch assembly code must find it at offset 0 without needing to know the full struct layout.
 
@@ -87,7 +87,7 @@ typedef struct TCB_s {
 
 Every task is always in one of four states. The scheduler only ever runs tasks in the **READY** state.
 
-![Task State Machine](rtos/diagrams/ch3_task_state.png){ width=75% }
+![Task State Machine](book_rtos/diagrams/ch3_task_state.png){ width=75% }
 
 > - Only ONE task is RUNNING at a time (on a single core).
 > - Multiple tasks can be READY simultaneously — priority breaks ties.
@@ -98,7 +98,7 @@ Every task is always in one of four states. The scheduler only ever runs tasks i
 
 Each task gets its **own private stack** — a region of SRAM reserved exclusively for that task's local variables, function call chain, and saved register frame.
 
-![Task stack](rtos/diagrams/ch3_task_stack.png){ width=75% }
+![Task stack](book_rtos/diagrams/ch3_task_stack.png){ width=75% }
 
 > Critical property:
 >   - Task A cannot corrupt Task B's stack.
@@ -209,7 +209,7 @@ The context switch is the code that swaps from one task to another. It must:
 3. Load the **next** task's `saved_sp`, pop its saved registers.
 4. Return — which resumes the next task mid-execution.
 
-![Context Switch — Register Save and Restore](rtos/diagrams/ch3_task_contex_switch.png){ width=75% }
+![Context Switch — Register Save and Restore](book_rtos/diagrams/ch3_task_contex_switch.png){ width=75% }
 
 On ARM Cortex-M, the context switch is triggered by the **PendSV** exception (Pended Supervisor Call). FreeRTOS and most other RTOSes use PendSV at the lowest possible priority so that all real ISRs complete before the switch occurs.
 
@@ -428,7 +428,7 @@ Notice how each task is now **sequential, readable code**. No state machines. No
 
 The scheduler maintains lists of TCBs. The simplest structure is a priority-sorted linked list of all READY tasks.
 
-![Ready List](rtos/diagrams/ch3_ready_list.png){ width=75% }
+![Ready List](book_rtos/diagrams/ch3_ready_list.png){ width=75% }
 
 ## The Unsolved Tension
 
