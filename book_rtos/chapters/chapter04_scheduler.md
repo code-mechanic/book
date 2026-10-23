@@ -135,9 +135,9 @@ The Idle Task's Role
   └──────────────────────────────────────────────────────────────┘
 
   Rules for the Idle hook (vApplicationIdleHook):
-    ✓ Must NOT block (no vTaskDelay, no semaphore waits)
-    ✓ Must NOT call vTaskDelete on itself
-    ✓ Safe place for: WDT refresh, power management, telemetry
+    (ok) Must NOT block (no vTaskDelay, no semaphore waits)
+    (ok) Must NOT call vTaskDelete on itself
+    (ok) Safe place for: WDT refresh, power management, telemetry
 ─────────────────────────────────────────────────────────────────────────
 ```
 
@@ -672,10 +672,10 @@ Priority Assignment Guidelines
      0      Idle task (automatic)           Power management
 
   Anti-patterns to avoid:
-  ✗ Giving all tasks the same priority — hides real-time requirements.
-  ✗ Priority inversion: low-priority task holds a mutex that a
+  X Giving all tasks the same priority — hides real-time requirements.
+  X Priority inversion: low-priority task holds a mutex that a
     high-priority task needs. (Covered in Chapter 6.)
-  ✗ Starvation: a very high-priority CPU-bound task that never blocks,
+  X Starvation: a very high-priority CPU-bound task that never blocks,
     preventing all lower-priority tasks from ever running.
 ─────────────────────────────────────────────────────────────────────────
 ```
@@ -772,10 +772,10 @@ The Shared Resource Problem
     It also blocks time-critical ISRs during the protected window.
 
   We need a mechanism that:
-    ✓ Blocks Task A from entering the critical section if Task B holds it
-    ✓ Does NOT disable hardware interrupts
-    ✓ Integrates with the scheduler (blocked task yields CPU gracefully)
-    ✓ Is safe when the same task tries to take it twice (reentrant option)
+    (ok) Blocks Task A from entering the critical section if Task B holds it
+    (ok) Does NOT disable hardware interrupts
+    (ok) Integrates with the scheduler (blocked task yields CPU gracefully)
+    (ok) Is safe when the same task tries to take it twice (reentrant option)
 
   That mechanism is the MUTEX — and it is the first topic of Chapter 5.
 ─────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,37 @@
+toc: false
+toc-depth: 2
+number-sections: false
+
+pdf-engine: xelatex
+highlight-style: tango
+
+include-in-header:
+  - pandoc/latex/head_interview_questions.tex
+
+filters:
+  - filters/number-code-lines.lua
+  - filters/boxed-tables.lua
+  - filters/admonitions.lua
+
+include-after-body:
+  - pandoc/latex/index.tex
+
+variables:
+  geometry:
+    - margin=1in
+    - bottom=1in
+    - left=1in
+    - right=1in
+  papersize: a4
+  colorlinks: true
+  linkcolor: blue
+  urlcolor: cyan
+  fontsize: 10pt
+  documentclass: report
+  classoption: a4paper
+  parskip: half
+  tables: true
+
+metadata:
+  title: Git Interview Questions
+  author: Mohan Arunachalam
