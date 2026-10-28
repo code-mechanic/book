@@ -1,23 +1,18 @@
-<!-- TOC -->
-
-- [File Handling in C](#file-handling-in-c)
-    - [File Streams and Opening Files](#file-streams-and-opening-files)
-        - [Key Summary: File Streams and Opening Files](#key-summary-file-streams-and-opening-files)
-    - [Writing and Appending Data](#writing-and-appending-data)
-    - [Reading Data and EOF](#reading-data-and-eof)
-        - [Key Summary: Reading Data and EOF](#key-summary-reading-data-and-eof)
-    - [Binary Mode: Arrays and Structures](#binary-mode-arrays-and-structures)
-        - [Key Summary: Binary Mode: Arrays and Structures](#key-summary-binary-mode-arrays-and-structures)
-    - [Updating and Cursor Movement](#updating-and-cursor-movement)
-        - [Visual Cursor Movement Diagram](#visual-cursor-movement-diagram)
-        - [Key Summary: Updating and Cursor Movement](#key-summary-updating-and-cursor-movement)
-    - [Finding File Size Using ftell](#finding-file-size-using-ftell)
-        - [Key Summary: Finding File Size Using ftell](#key-summary-finding-file-size-using-ftell)
-    - [Summary of File Operation APIs](#summary-of-file-operation-apis)
-
-<!-- /TOC -->
-
 # File Handling in C
+
+- [File Streams and Opening Files](#file-streams-and-opening-files)
+  - [Key Summary: File Streams and Opening Files](#key-summary-file-streams-and-opening-files)
+- [Writing and Appending Data](#writing-and-appending-data)
+- [Reading Data and EOF](#reading-data-and-eof)
+  - [Key Summary: Reading Data and EOF](#key-summary-reading-data-and-eof)
+- [Binary Mode: Arrays and Structures](#binary-mode-arrays-and-structures)
+  - [Key Summary: Binary Mode: Arrays and Structures](#key-summary-binary-mode-arrays-and-structures)
+- [Updating and Cursor Movement](#updating-and-cursor-movement)
+  - [Visual Cursor Movement Diagram](#visual-cursor-movement-diagram)
+  - [Key Summary: Updating and Cursor Movement](#key-summary-updating-and-cursor-movement)
+- [Finding File Size Using ftell](#finding-file-size-using-ftell)
+  - [Key Summary: Finding File Size Using ftell](#key-summary-finding-file-size-using-ftell)
+- [Summary of File Operation APIs](#summary-of-file-operation-apis)
 
 Standard C programs execute in memory, and any output directed to the console is permanently lost the moment the program or console window is closed. To save the results of an application persistently—such as creating diagnostic log files, saving user progress, or tracking network statuses—programmers must redirect data to the hard disk. This concept is called File Handling. Files in C are broadly categorized into two types: Text files (like `.txt` documents) and Binary files (like images, audio, and raw structure blocks).
 
@@ -186,10 +181,11 @@ int main() {
 To write entire arrays or structures seamlessly, C provides `fwrite()` and `fread()`. Because these functions operate on raw memory blocks rather than text strings, you should strictly append a `b` to the file mode (`"wb"` for Write Binary, `"rb"` for Read Binary).
 
 These functions take exactly four arguments:
-    1.  **Source/Target Address:** Where the data is stored in RAM (`&emp`).
-    2.  **Item Size:** The byte size of a single element (`sizeof(struct emp)`).
-    3.  **Number of Items:** How many elements to copy (`1` for a single struct, or `n` for an array).
-    4.  **File Pointer:** The destination stream (`fp`).
+
+1. **Source/Target Address:** Where the data is stored in RAM (`&emp`).
+2. **Item Size:** The byte size of a single element (`sizeof(struct emp)`).
+3. **Number of Items:** How many elements to copy (`1` for a single struct, or `n` for an array).
+4. **File Pointer:** The destination stream (`fp`).
 
 ```c
 /* BINARY WRITE (fwrite) */
